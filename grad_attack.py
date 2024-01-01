@@ -20,6 +20,9 @@ def cosine_decay(init_lr, step, num_steps, alpha):
     return alpha * init_lr + (1-alpha) * a
 
 def attack(net: nn.Module, img: torch.Tensor, num_steps=100, init_lr=1e-3, epsilon=.01, lmbda=1.) -> torch.Tensor:
+    """
+    Adversarial attack using Projected ADAM optimizer
+    """
     img = img.detach().cuda()
     # input = nn.Parameter(img.clone().detach().unsqueeze(0))
     noise = nn.Parameter(epsilon*(torch.rand_like(img)-0.5).unsqueeze(0))

@@ -54,7 +54,8 @@ class Kodak(Dataset):
     def __init__(self, patch_size=512) -> None:
         super().__init__()
         dataset_glob = "/home/xyhang/dataset/kodak/*.png"
-        self.image_list = glob.glob(dataset_glob).sort()
+        self.image_list = glob.glob(dataset_glob)
+        self.image_list.sort()
         self.len_image_list = len(self.image_list)
         self.patch_size = patch_size
 
