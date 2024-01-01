@@ -26,6 +26,9 @@ class AverageMeter:
         self.count += n
         self.avg = self.sum / self.count
 
+    def reset(self):
+        self.__init__()
+
 class Trainer:
     def __init__(self, params, lr, optimizer_class, dataloader, test_dataloader, criterion, steps_per_epoch, milestones, clip_max_norm, writer, device, save_path, output_interval=1000):
         self.optimizer = optimizer_class(params, lr=lr)
@@ -46,9 +49,11 @@ class Trainer:
 
         self.config_logger()
     
+    @torch.enable_grad()
     def train_one_epoch(self, forward_func):
         if self.logger is not None:
             self.logger.info(f"Learning rate: {self.optimizer.param_groups[0]['lr']}")
+        loss_dict = {}
         for i, d in enumerate(self.dataloader):
             if isinstance(d, torch.Tensor):
                 d = d.to(self.device)
@@ -59,6 +64,11 @@ class Trainer:
                 d = tuple(d_new)
             out_net = forward_func(d)
             out_criterion = self.criterion(out_net, d)
+            
+            for key, value in out_criterion.items():
+                loss_dict.setdefault(key, AverageMeter())
+                loss_dict[key].update(value.detach())
+
             self.optimizer.zero_grad()
             out_criterion['loss'].backward()
 
@@ -69,10 +79,11 @@ class Trainer:
             if i % self.output_interval == 0:
                 train_log = f"Train epoch {self.epoch}: [{i}/{self.steps_per_epoch} ({100. * i / self.steps_per_epoch:.2f}%)] "
                 
-                for k, v in out_criterion.items():
-                    train_log += f'\t{k}: {v.item():.6f} |'
+                for k, v in loss_dict.items():
+                    train_log += f'\t{k}: {v.avg.cpu().numpy().item():.6f} |'
                     if self.writer:
-                        self.writer.add_scalar("train_"+k, v.detach().cpu().numpy().item(), self.global_step)
+                        self.writer.add_scalar("train_"+k, v.avg.detach().cpu().numpy().item(), self.global_step)
+                    v.reset()
                 if self.logger is not None:
                     self.logger.info(train_log)
             
@@ -102,7 +113,6 @@ class Trainer:
     
     def test_one_epoch(self, forward_func):
         with torch.no_grad():
-            losses = []
             loss_dict = {}
 
             for d in self.test_dataloader:

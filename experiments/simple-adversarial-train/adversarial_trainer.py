@@ -11,7 +11,9 @@ class AdversarialTrainer(Trainer):
         self.epsilon = epsilon
         self.adv_steps = adv_steps
     
+    @torch.enable_grad()
     def train_one_epoch(self, forward_func):
+        loss_dict = {}
         if self.logger is not None:
             self.logger.info(f"Learning rate: {self.optimizer.param_groups[0]['lr']}")
         for i, d in enumerate(self.dataloader):
@@ -25,6 +27,11 @@ class AdversarialTrainer(Trainer):
             d_adv = attack(forward_func, d, num_steps=self.adv_steps, epsilon=self.epsilon, criterion=self.criterion)
             out_net = forward_func(d_adv)
             out_criterion = self.criterion(out_net, d_adv)
+            
+            for key, value in out_criterion.items():
+                loss_dict.setdefault(key, AverageMeter())
+                loss_dict[key].update(value.detach())
+
             self.optimizer.zero_grad()
             out_criterion['loss'].backward()
 
@@ -35,10 +42,11 @@ class AdversarialTrainer(Trainer):
             if i % self.output_interval == 0:
                 train_log = f"Train epoch {self.epoch}: [{i}/{self.steps_per_epoch} ({100. * i / self.steps_per_epoch:.2f}%)] "
                 
-                for k, v in out_criterion.items():
-                    train_log += f'\t{k}: {v.item():.6f} |'
+                for k, v in loss_dict.items():
+                    train_log += f'\t{k}: {v.avg.cpu().numpy().item():.6f} |'
                     if self.writer:
-                        self.writer.add_scalar("train_"+k, v.detach().cpu().numpy().item(), self.global_step)
+                        self.writer.add_scalar("train_"+k, v.avg.detach().cpu().numpy().item(), self.global_step)
+                    v.reset()
                 if self.logger is not None:
                     self.logger.info(train_log)
             
