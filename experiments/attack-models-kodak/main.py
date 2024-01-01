@@ -50,7 +50,8 @@ if __name__ == "__main__":
         min_psnr_origin = float('inf')
 
         for lmbda in args.lmbdas:
-            attk = attack(net=net, img=img, num_steps=args.num_steps, epsilon=args.epsilon, lmbda=lmbda)
+            criterion = RateDistortionLoss(lmbda)
+            attk = attack(net=net, img=img, num_steps=args.num_steps, epsilon=args.epsilon, criterion=criterion)
             psnr_origin = PSNR(attk, img)
             print(f"PSNR-origin-attack: {psnr_origin:.5f}")
             if min_psnr_origin > psnr_origin:

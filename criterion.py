@@ -10,9 +10,10 @@ def PSNR(x, y):
 class RateDistortionLoss(nn.Module):
     """Custom rate distortion loss with a Lagrangian parameter. L = D + \lambda R"""
 
-    def __init__(self):
+    def __init__(self, lmbda):
         super().__init__()
         self.mse = nn.MSELoss()
+        self.lmbda = lmbda
 
     def forward(self, output, target, lmbda):
         N, _, H, W = target.size()
