@@ -77,7 +77,7 @@ class AdversarialTrainer(Trainer):
                 loss_dict.setdefault(key, AverageMeter())
                 loss_dict[key].update(value)
 
-        test_log = f"Testing results for epoch {self.epoch}"
+        test_log = f"Testing results for epoch {self.epoch} [ADVERSARIAL]"
         for k, meter in loss_dict.items():
             test_log += f" | {k}={meter.avg:.5f}"
             if self.writer:

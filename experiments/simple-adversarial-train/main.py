@@ -72,9 +72,12 @@ def parse_args(argv):
     args = parser.parse_args(argv)
     return args
 
+def generate_exp_name(model, parameter_set, epochs, steps_per_epoch, epsilon, adv_steps):
+    return f"{model}-{parameter_set}-{epochs}x{steps_per_epoch}-{epsilon}-{adv_steps}"
+
 if __name__ == '__main__':
     args = parse_args(sys.argv[1:])
-    save_path = os.path.join(ROOTDIR, f"{args.model}-{args.parameter_set}-{args.epochs}x{args.steps_per_epoch}-{args.epsilon}-{args.adv_steps}")
+    save_path = os.path.join(ROOTDIR, generate_exp_name(args.model, args.parameter_set, args.epochs, args.steps_per_epoch, args.epsilon, args.adv_steps))
     tb_path = os.path.join(save_path, "tensorboard/")
     if not os.path.exists(save_path):
         os.makedirs(save_path)
@@ -114,6 +117,7 @@ if __name__ == '__main__':
         output_interval=10,
     )
     trainer.logger.info("Args: " + args.__str__())
+    trainer.logger.info(f"Lmbda={lmbda:.12f}")
     
     if args.checkpoint:  # load from previous checkpoint
         trainer.logger.info(f"Loading {args.checkpoint}")
