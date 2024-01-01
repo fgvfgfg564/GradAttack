@@ -1,7 +1,7 @@
 import torch
 import torch.nn as nn
 
-from lib.trainer import Trainer
+from lib.trainer import Trainer, AverageMeter
 from grad_attack import attack
 
 class AdversarialTrainer(Trainer):
@@ -49,3 +49,37 @@ class AdversarialTrainer(Trainer):
         
         self.scheduler.step()
         self.epoch += 1
+    
+    def test_adversarial(self, forward_func):
+        with torch.no_grad():
+            loss_dict = {}
+
+            for d in self.test_dataloader:
+                if isinstance(d, torch.Tensor):
+                    d = d.to(self.device)
+                else:
+                    d_new = []
+                    for each in d:
+                        d_new.append(each.to(self.device))
+                    d = tuple(d_new)
+                d_adv = attack(forward_func, d, self.adv_steps, epsilon=self.epsilon, criterion=self.criterion)
+                out_net = forward_func(d_adv)
+                out_criterion = self.criterion(out_net, d_adv)
+                for key, value in out_criterion.items():
+                    loss_dict.setdefault(key, AverageMeter())
+                    loss_dict[key].update(value)
+
+            test_log = f"Testing results for epoch {self.epoch}"
+            for k, meter in loss_dict.items():
+                test_log += f" | {k}={meter.avg:.5f}"
+                if self.writer:
+                    self.writer.add_scalar(k, meter.avg.cpu().numpy().item(), self.epoch)
+            if self.logger:
+                self.logger.info(test_log)
+            loss = loss_dict["loss"].avg.cpu().numpy().item()
+
+            self.writer.add_scalar("test_loss", loss, self.epoch)
+            is_best = loss < self.best_loss
+            self.best_loss = min(loss, self.best_loss)
+        
+        return is_best

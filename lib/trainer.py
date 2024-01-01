@@ -114,7 +114,6 @@ class Trainer:
                     loss_dict[key].update(value)
 
             test_log = f"Testing results for epoch {self.epoch}"
-            loss_items = []
             for k, meter in loss_dict.items():
                 test_log += f" | {k}={meter.avg:.5f}"
                 if self.writer:
