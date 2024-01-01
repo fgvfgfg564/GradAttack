@@ -12,8 +12,8 @@ def get_recon_bpp(net: nn.Module, img, training=False):
     out_net = net(input)
     out_net['x_hat'] = out_net['x_hat'].clamp(0., 1.)
     recon_img = out_net['x_hat'].detach().cpu()[0]
-    criterion = RateDistortionLoss()
-    out_criterion = criterion(out_net, input, 0)
+    criterion = RateDistortionLoss(0.)
+    out_criterion = criterion(out_net, input)
     bpp = out_criterion['bpp_loss'].detach().cpu()
     psnr = out_criterion['psnr_loss'].detach().cpu()
     return recon_img, bpp, psnr
