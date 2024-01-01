@@ -37,7 +37,7 @@ if __name__ == "__main__":
     ax.plot(jpeg_reference[0], jpeg_reference[1], color='grey', label='JPEG')
 
     for quality in args.quality:
-        net = load_model(args.net, quality=quality)
+        net = load_model(args.net, quality)
         print(f"Quality={quality}")
 
         _, bpp_an, psnr_an = get_recon_bpp(net, img)

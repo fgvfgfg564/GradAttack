@@ -5,6 +5,12 @@ import os
 
 import numpy as np
 
+def save_checkpoint(state, is_best, save_path):
+    torch.save(state, os.path.join(save_path, "last_epoch.pth.tar"))
+
+    if is_best:
+        torch.save(state, os.path.join(save_path, "best_epoch.pth.tar"))
+
 class AverageMeter:
     """Compute running average."""
 
@@ -66,7 +72,7 @@ class Trainer:
                 for k, v in out_criterion.items():
                     train_log += f'\t{k}: {v.item():.6f} |'
                     if self.writer:
-                        self.writer.add_scalar(k, v.detach().cpu().numpy().item(), self.global_step)
+                        self.writer.add_scalar("train_"+k, v.detach().cpu().numpy().item(), self.global_step)
                 if self.logger is not None:
                     self.logger.info(train_log)
             
@@ -117,12 +123,10 @@ class Trainer:
             for k, meter in loss_dict.items():
                 test_log += f" | {k}={meter.avg:.5f}"
                 if self.writer:
-                    self.writer.add_scalar(k, meter.avg.cpu().numpy().item(), self.epoch)
+                    self.writer.add_scalar("test_"+k, meter.avg.cpu().numpy().item(), self.epoch)
             if self.logger:
                 self.logger.info(test_log)
             loss = loss_dict["loss"].avg.cpu().numpy().item()
-
-            self.writer.add_scalar("test_loss", loss, self.epoch)
             is_best = loss < self.best_loss
             self.best_loss = min(loss, self.best_loss)
         

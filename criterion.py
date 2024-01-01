@@ -15,7 +15,7 @@ class RateDistortionLoss(nn.Module):
         self.mse = nn.MSELoss()
         self.lmbda = lmbda
 
-    def forward(self, output, target, lmbda):
+    def forward(self, output, target):
         N, _, H, W = target.size()
         out = {}
         num_pixels = N * H * W
@@ -28,7 +28,7 @@ class RateDistortionLoss(nn.Module):
         out['bpp_z_loss'] = torch.sum(bits_z) / num_pixels
         out['bpp_loss'] = out['bpp_y_loss'] + out["bpp_z_loss"]
         out["mse_loss"] = torch.mean((output['x_hat'] - target) ** 2)
-        out["loss"] = out["mse_loss"] + lmbda * out["bpp_loss"]
+        out["loss"] = out["mse_loss"] + self.lmbda * out["bpp_loss"]
         out["psnr_loss"] = -10 * torch.log10(out["mse_loss"])
 
         return out

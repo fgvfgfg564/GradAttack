@@ -22,7 +22,7 @@ class AdversarialTrainer(Trainer):
                 for each in d:
                     d_new.append(each.to(self.device))
                 d = tuple(d_new)
-            d_adv = attack(forward_func, d, self.adv_steps, epsilon=self.epsilon, criterion=self.criterion)
+            d_adv = attack(forward_func, d, num_steps=self.adv_steps, epsilon=self.epsilon, criterion=self.criterion)
             out_net = forward_func(d_adv)
             out_criterion = self.criterion(out_net, d_adv)
             self.optimizer.zero_grad()
@@ -38,7 +38,7 @@ class AdversarialTrainer(Trainer):
                 for k, v in out_criterion.items():
                     train_log += f'\t{k}: {v.item():.6f} |'
                     if self.writer:
-                        self.writer.add_scalar(k, v.detach().cpu().numpy().item(), self.global_step)
+                        self.writer.add_scalar("train_"+k, v.detach().cpu().numpy().item(), self.global_step)
                 if self.logger is not None:
                     self.logger.info(train_log)
             
@@ -62,7 +62,7 @@ class AdversarialTrainer(Trainer):
                     for each in d:
                         d_new.append(each.to(self.device))
                     d = tuple(d_new)
-                d_adv = attack(forward_func, d, self.adv_steps, epsilon=self.epsilon, criterion=self.criterion)
+                d_adv = attack(forward_func, d, num_steps=self.adv_steps, epsilon=self.epsilon, criterion=self.criterion)
                 out_net = forward_func(d_adv)
                 out_criterion = self.criterion(out_net, d_adv)
                 for key, value in out_criterion.items():
@@ -73,12 +73,10 @@ class AdversarialTrainer(Trainer):
             for k, meter in loss_dict.items():
                 test_log += f" | {k}={meter.avg:.5f}"
                 if self.writer:
-                    self.writer.add_scalar(k, meter.avg.cpu().numpy().item(), self.epoch)
+                    self.writer.add_scalar("test_adversarial_"+k, meter.avg.cpu().numpy().item(), self.epoch)
             if self.logger:
                 self.logger.info(test_log)
             loss = loss_dict["loss"].avg.cpu().numpy().item()
-
-            self.writer.add_scalar("test_loss", loss, self.epoch)
             is_best = loss < self.best_loss
             self.best_loss = min(loss, self.best_loss)
         

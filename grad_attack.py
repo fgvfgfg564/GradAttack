@@ -1,7 +1,6 @@
 import torch
 import torch.nn as nn
-
-from criterion import RateDistortionLoss
+import math
 
 # def normalize_l2(x, delta):
 #     mx = x.square().mean()
@@ -16,13 +15,14 @@ def normalize_l0(x, delta):
 
 def cosine_decay(init_lr, step, num_steps, alpha):
     t = step / num_steps
-    a = (1. + torch.cos(torch.tensor(t * torch.pi))) * init_lr / 2
+    a = (1. + math.cos(t * math.pi)) * init_lr / 2
     return alpha * init_lr + (1-alpha) * a
 
 def attack(net: nn.Module, img: torch.Tensor, criterion, num_steps=100, init_lr=1e-3, epsilon=.01) -> torch.Tensor:
     """
     Adversarial attack using Projected ADAM optimizer
     """
+    device = img.device
     if len(img.shape) == 3:
         no_batch = True
         img = img.unsqueeze(0)
@@ -32,7 +32,7 @@ def attack(net: nn.Module, img: torch.Tensor, criterion, num_steps=100, init_lr=
     noise = nn.Parameter(epsilon*(torch.rand_like(img)-0.5))
     # print(input)
     net = net.cuda()
-    optimizer = torch.optim.Adam([noise], init_lr)
+    optimizer = torch.optim.Adam((noise,), init_lr)
     net.train()
     for i in range(num_steps):
         optimizer.param_groups[0]['lr'] = cosine_decay(init_lr, i, num_steps, 0.01)
@@ -55,7 +55,7 @@ def attack(net: nn.Module, img: torch.Tensor, criterion, num_steps=100, init_lr=
         loss.backward()
         optimizer.step()
     noise_normed = normalize_l0(noise, epsilon)
-    output = (noise_normed + img).clamp(0., 1.).detach().cpu()
+    output = (noise_normed + img).clamp(0., 1.).detach().to(device)
     output = torch.round(output * 255) / 255.
     if no_batch:
         output = output[0]

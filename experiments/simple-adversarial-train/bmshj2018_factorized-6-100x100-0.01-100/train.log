@@ -1,0 +1,2 @@
+[2024-01-01 06:15:18,200 | INFO | <module>] Args: Namespace(model='bmshj2018_factorized', parameter_set=6, epsilon=0.01, adv_steps=100, batch_size=8, epochs=100, steps_per_epoch=100, learning_rate=0.0001, save=True, seed=19260817, clip_max_norm=-1.0, checkpoint=None, type='mse', lr_epoch=[5], continue_train=False)
+[2024-01-01 06:15:18,200 | INFO | train_one_epoch] Learning rate: 0.0001
