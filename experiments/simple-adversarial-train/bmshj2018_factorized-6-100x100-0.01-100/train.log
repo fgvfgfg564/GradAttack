@@ -1,2 +1,15 @@
 [2024-01-01 06:15:18,200 | INFO | <module>] Args: Namespace(model='bmshj2018_factorized', parameter_set=6, epsilon=0.01, adv_steps=100, batch_size=8, epochs=100, steps_per_epoch=100, learning_rate=0.0001, save=True, seed=19260817, clip_max_norm=-1.0, checkpoint=None, type='mse', lr_epoch=[5], continue_train=False)
 [2024-01-01 06:15:18,200 | INFO | train_one_epoch] Learning rate: 0.0001
+[2024-01-01 06:15:39,900 | INFO | train_one_epoch] Train epoch 0: [0/100 (0.00%)] 	bpp_y_loss: 0.973782 |	bpp_z_loss: 0.000000 |	bpp_loss: 0.973782 |	mse_loss: 0.000400 |	loss: 0.000710 |	psnr_loss: 33.978889 |
+[2024-01-01 06:17:33,349 | INFO | train_one_epoch] Train epoch 0: [10/100 (10.00%)] 	bpp_y_loss: 0.771421 |	bpp_z_loss: 0.000000 |	bpp_loss: 0.771421 |	mse_loss: 0.000320 |	loss: 0.000566 |	psnr_loss: 34.944225 |
+[2024-01-01 06:19:26,802 | INFO | train_one_epoch] Train epoch 0: [20/100 (20.00%)] 	bpp_y_loss: 0.789482 |	bpp_z_loss: 0.000000 |	bpp_loss: 0.789482 |	mse_loss: 0.000396 |	loss: 0.000647 |	psnr_loss: 34.027340 |
+[2024-01-01 06:21:20,248 | INFO | train_one_epoch] Train epoch 0: [30/100 (30.00%)] 	bpp_y_loss: 0.783696 |	bpp_z_loss: 0.000000 |	bpp_loss: 0.783696 |	mse_loss: 0.000363 |	loss: 0.000613 |	psnr_loss: 34.397888 |
+[2024-01-01 06:23:13,670 | INFO | train_one_epoch] Train epoch 0: [40/100 (40.00%)] 	bpp_y_loss: 0.750664 |	bpp_z_loss: 0.000000 |	bpp_loss: 0.750664 |	mse_loss: 0.000295 |	loss: 0.000535 |	psnr_loss: 35.294556 |
+[2024-01-01 06:25:07,115 | INFO | train_one_epoch] Train epoch 0: [50/100 (50.00%)] 	bpp_y_loss: 0.754584 |	bpp_z_loss: 0.000000 |	bpp_loss: 0.754584 |	mse_loss: 0.000292 |	loss: 0.000532 |	psnr_loss: 35.352345 |
+[2024-01-01 06:27:00,599 | INFO | train_one_epoch] Train epoch 0: [60/100 (60.00%)] 	bpp_y_loss: 0.870424 |	bpp_z_loss: 0.000000 |	bpp_loss: 0.870424 |	mse_loss: 0.000412 |	loss: 0.000689 |	psnr_loss: 33.847862 |
+[2024-01-01 06:28:54,035 | INFO | train_one_epoch] Train epoch 0: [70/100 (70.00%)] 	bpp_y_loss: 0.759161 |	bpp_z_loss: 0.000000 |	bpp_loss: 0.759161 |	mse_loss: 0.000326 |	loss: 0.000567 |	psnr_loss: 34.873711 |
+[2024-01-01 06:30:47,483 | INFO | train_one_epoch] Train epoch 0: [80/100 (80.00%)] 	bpp_y_loss: 0.987407 |	bpp_z_loss: 0.000000 |	bpp_loss: 0.987407 |	mse_loss: 0.000448 |	loss: 0.000763 |	psnr_loss: 33.482838 |
+[2024-01-01 06:32:40,909 | INFO | train_one_epoch] Train epoch 0: [90/100 (90.00%)] 	bpp_y_loss: 0.865732 |	bpp_z_loss: 0.000000 |	bpp_loss: 0.865732 |	mse_loss: 0.000378 |	loss: 0.000654 |	psnr_loss: 34.225231 |
+[2024-01-01 06:34:34,333 | INFO | train_one_epoch] Train epoch 0: [100/100 (100.00%)] 	bpp_y_loss: 0.635431 |	bpp_z_loss: 0.000000 |	bpp_loss: 0.635431 |	mse_loss: 0.000250 |	loss: 0.000452 |	psnr_loss: 36.028439 |
+[2024-01-01 07:13:53,582 | INFO | <module>] Args: Namespace(model='bmshj2018_factorized', parameter_set=6, epsilon=0.01, adv_steps=100, batch_size=8, epochs=100, steps_per_epoch=100, learning_rate=0.0001, save=True, seed=19260817, clip_max_norm=-1.0, checkpoint=None, type='mse', lr_epoch=[5], continue_train=False)
+[2024-01-01 07:13:53,582 | INFO | train_one_epoch] Learning rate: 0.0001

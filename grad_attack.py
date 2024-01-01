@@ -18,6 +18,7 @@ def cosine_decay(init_lr, step, num_steps, alpha):
     a = (1. + math.cos(t * math.pi)) * init_lr / 2
     return alpha * init_lr + (1-alpha) * a
 
+@torch.enable_grad()
 def attack(net: nn.Module, img: torch.Tensor, criterion, num_steps=100, init_lr=1e-3, epsilon=.01) -> torch.Tensor:
     """
     Adversarial attack using Projected ADAM optimizer
