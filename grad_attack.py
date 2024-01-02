@@ -1,6 +1,9 @@
 import torch
 import torch.nn as nn
 import math
+from lib.trainer import AverageMeter
+from criterion import RateDistortionLoss
+from compressai.utils.eval_model.__main__ import inference
 
 # def normalize_l2(x, delta):
 #     mx = x.square().mean()
@@ -19,7 +22,7 @@ def cosine_decay(init_lr, step, num_steps, alpha):
     return alpha * init_lr + (1-alpha) * a
 
 @torch.enable_grad()
-def attack(net: nn.Module, img: torch.Tensor, criterion, num_steps=100, init_lr=1e-3, epsilon=.01) -> torch.Tensor:
+def attack(net: nn.Module, img: torch.Tensor, criterion, num_steps=100, init_lr=1e-3, epsilon=.01, inverse=False) -> torch.Tensor:
     """
     Adversarial attack using Projected ADAM optimizer
     """
@@ -44,6 +47,8 @@ def attack(net: nn.Module, img: torch.Tensor, criterion, num_steps=100, init_lr=
         out["x_hat"] = torch.clamp(out["x_hat"], 0., 1.)
         out_criterion = criterion(out, input2)
         loss_rd = - out_criterion['loss']
+        if inverse:
+            loss_rd *= -1
         loss = loss_rd
 
         if i % 10 == 0:
@@ -61,3 +66,37 @@ def attack(net: nn.Module, img: torch.Tensor, criterion, num_steps=100, init_lr=
     if no_batch:
         output = output[0]
     return output
+
+@torch.no_grad()
+def adversarial_test(net: nn.Module, dataloader, adversarial=False, lmbda=1., epsilon=0.01, steps=100):
+    net.eval()
+    device = next(net.parameters()).device
+    loss_dict = {}
+
+    for i, d in enumerate(dataloader):
+        print(f"Testing image #{i}", flush=True)
+        if isinstance(d, torch.Tensor):
+            d = d.to(device)
+        else:
+            d_new = []
+            for each in d:
+                d_new.append(each.to(device))
+            d = tuple(d_new)
+        
+        if adversarial:
+            criterion = RateDistortionLoss(lmbda)
+            d = attack(net, d, criterion, steps, epsilon=epsilon).to(device)
+
+        out_criterion = inference(net, d[0])
+
+        for key, value in out_criterion.items():
+            loss_dict.setdefault(key, AverageMeter())
+            loss_dict[key].update(value)
+
+        sample_log = ""
+        for k, v in out_criterion.items():
+            sample_log += f"{k}={v:.5f}\n"
+        print(sample_log, flush=True)
+
+    result = {k:v.avg for k,v in loss_dict.items()}
+    return result

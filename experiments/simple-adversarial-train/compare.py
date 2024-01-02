@@ -1,4 +1,3 @@
-from main import parse_args
 import sys
 import os
 import torch
@@ -8,18 +7,14 @@ import random
 from torch.utils.data import DataLoader
 import torch.nn as nn
 import matplotlib.pyplot as plt
-from compressai.utils.eval_model.__main__ import inference
 
 from nets import load_model, load_lmbda
 from dataset import Kodak
-from grad_attack import attack
-from lib.trainer import AverageMeter
-from criterion import RateDistortionLoss
+from grad_attack import adversarial_test
 
 from main import generate_exp_name
 
 ROOTDIR = os.path.split(__file__)[0]
-
 
 def parse_args(argv):
     parser = argparse.ArgumentParser(description="Simple adversarial training for LIC.")
@@ -37,45 +32,6 @@ def parse_args(argv):
     # dataset parameters
     args = parser.parse_args(argv)
     return args
-
-@torch.no_grad()
-def test(net: nn.Module, dataloader, adversarial=False, lmbda=1., epsilon=0.01, steps=100):
-    net.eval()
-    device = next(net.parameters()).device
-    loss_dict = {}
-
-    for i, d in enumerate(dataloader):
-        print(f"Testing image #{i}", flush=True)
-        if isinstance(d, torch.Tensor):
-            d = d.to(device)
-        else:
-            d_new = []
-            for each in d:
-                d_new.append(each.to(device))
-            d = tuple(d_new)
-        
-        if adversarial:
-            criterion = RateDistortionLoss(lmbda)
-            d = attack(net, d, criterion, steps, epsilon=epsilon).to(device)
-
-        out_criterion = inference(net, d[0])
-
-        for key, value in out_criterion.items():
-            loss_dict.setdefault(key, AverageMeter())
-            loss_dict[key].update(value)
-
-        sample_log = ""
-        for k, v in out_criterion.items():
-            sample_log += f"{k}={v:.5f}\n"
-        print(sample_log, flush=True)
-
-    result = {k:v.avg for k,v in loss_dict.items()}
-
-    # test_log = f"Testing results(average)"
-    # for k, v in result.items():
-    #     test_log += f" | {k}={v:.5f}"
-    # print(test_log)
-    return result
 
 def plot(bpps, psnrs, labels, title, save_path):
     fig = plt.figure(figsize=(6, 4))
@@ -131,10 +87,10 @@ if __name__ == "__main__":
         test_dataset = Kodak(None)
         test_dataloader = DataLoader(test_dataset, batch_size=1, shuffle=False, pin_memory=True, pin_memory_device=device)
 
-        result_anchor = test(net_anchor, test_dataloader)
-        result_retrained = test(net, test_dataloader)
-        result_adv_anchor = test(net_anchor, test_dataloader, True, lmbda, args.epsilon, args.adv_steps)
-        result_adv_retrained = test(net, test_dataloader, True, lmbda, args.epsilon, args.adv_steps)
+        result_anchor = adversarial_test(net_anchor, test_dataloader)
+        result_retrained = adversarial_test(net, test_dataloader)
+        result_adv_anchor = adversarial_test(net_anchor, test_dataloader, True, lmbda, args.epsilon, args.adv_steps)
+        result_adv_retrained = adversarial_test(net, test_dataloader, True, lmbda, args.epsilon, args.adv_steps)
 
         bpp_anchor.append(result_anchor['bpp'])
         bpp_retrained.append(result_retrained['bpp'])
@@ -147,5 +103,4 @@ if __name__ == "__main__":
         psnr_adv_retrained.append(result_adv_retrained['psnr'])
 
     pltname = generat_plot_name(args.model, args.parameter_set, args.epsilon, args.adv_steps)
-    plot([bpp_anchor, bpp_retrained], [psnr_anchor, psnr_retrained], [args.model, args.model+'*'], 'Kodak', os.path.join(ROOTDIR, pltname))
-    plot([bpp_adv_anchor, bpp_adv_retrained], [psnr_adv_anchor, psnr_adv_retrained], [args.model, args.model+'*'], 'Kodak-adversary', os.path.join(ROOTDIR, pltname+'_adversary'))
+    plot([bpp_anchor, bpp_retrained, bpp_adv_anchor, bpp_adv_retrained], [psnr_anchor, psnr_retrained, psnr_adv_anchor, psnr_adv_retrained], [args.model, args.model+'*', args.model+"(adv)", args.model+'*(adv)'], 'Kodak', os.path.join(ROOTDIR, pltname))
