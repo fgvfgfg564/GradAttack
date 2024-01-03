@@ -8,7 +8,7 @@ def PSNR(x, y):
 
 
 class RateDistortionLoss(nn.Module):
-    """Custom rate distortion loss with a Lagrangian parameter. L = D + \lambda R"""
+    """Custom rate distortion loss with a Lagrangian parameter. L = R + \lambda * 255 ^2 D"""
 
     def __init__(self, lmbda):
         super().__init__()
@@ -28,7 +28,7 @@ class RateDistortionLoss(nn.Module):
         out['bpp_z_loss'] = torch.sum(bits_z) / num_pixels
         out['bpp_loss'] = out['bpp_y_loss'] + out["bpp_z_loss"]
         out["mse_loss"] = torch.mean((output['x_hat'] - target) ** 2)
-        out["loss"] = out["mse_loss"] + self.lmbda * out["bpp_loss"]
+        out["loss"] = self.lmbda * (255. ** 2) * out["mse_loss"] + out["bpp_loss"]
         out["psnr_loss"] = -10 * torch.log10(out["mse_loss"])
 
         return out

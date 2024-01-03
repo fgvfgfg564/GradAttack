@@ -9,7 +9,7 @@ COMPRESSAI_LAMBDAS = {
 def translate_lambda(lmbda_cai):
     return 1. / (lmbda_cai * 255 ** 2)
 
-LMBDAS_MSE_CAI = [0] + list([translate_lambda(x) for x in COMPRESSAI_LAMBDAS['MSE']])
+LMBDAS_MSE_CAI = [0] + COMPRESSAI_LAMBDAS['MSE']
 
 @register_model('bmshj2018_factorized', LMBDAS_MSE_CAI)
 def bmshj2018_factorized(quality):

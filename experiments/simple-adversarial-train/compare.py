@@ -10,7 +10,7 @@ import matplotlib.pyplot as plt
 
 from nets import load_model, load_lmbda
 from dataset import Kodak
-from grad_attack import adversarial_test
+from grad_attack import adversarial_tests
 
 from main import generate_exp_name
 
@@ -25,7 +25,9 @@ def parse_args(argv):
 
     # Adversarial parameters
     parser.add_argument("--epsilon", type=float, default=0.01)
+    parser.add_argument("--epsilon_train", type=float, default=0.01)
     parser.add_argument("--adv_steps", type=int, default=100)
+    parser.add_argument("--adv_steps_train", type=int, default=100)
 
     parser.add_argument("--seed", type=int, default=19260817)
 
@@ -64,14 +66,18 @@ if __name__ == "__main__":
     bpp_retrained = []
     bpp_adv_anchor = []
     bpp_adv_retrained = []
+    bpp_adv_ideal_anchor = []
+    bpp_adv_ideal_retrained = []
 
     psnr_anchor = []
     psnr_retrained = []
     psnr_adv_anchor = []
     psnr_adv_retrained = []
+    psnr_adv_ideal_anchor = []
+    psnr_adv_ideal_retrained = []
 
     for paramset in args.parameter_set:
-        expname = generate_exp_name(args.model, paramset, 100, 100, 0.01, 100)
+        expname = generate_exp_name(args.model, paramset, 100, 100, args.epsilon_train, args.adv_steps_train)
         ckptname = os.path.join(ROOTDIR, expname, "best_epoch.pth.tar")
 
         net_anchor = load_model(args.model, paramset)
@@ -87,20 +93,23 @@ if __name__ == "__main__":
         test_dataset = Kodak(None)
         test_dataloader = DataLoader(test_dataset, batch_size=1, shuffle=False, pin_memory=True, pin_memory_device=device)
 
-        result_anchor = adversarial_test(net_anchor, test_dataloader)
-        result_retrained = adversarial_test(net, test_dataloader)
-        result_adv_anchor = adversarial_test(net_anchor, test_dataloader, True, lmbda, args.epsilon, args.adv_steps)
-        result_adv_retrained = adversarial_test(net, test_dataloader, True, lmbda, args.epsilon, args.adv_steps)
+        result_anchor, result_adv_anchor, result_adv_ideal_anchor = adversarial_tests(net_anchor, test_dataloader, lmbda, args.epsilon, args.adv_steps)
+
+        result_retrained, result_adv_retrained, result_adv_ideal_retrained = adversarial_tests(net, test_dataloader, lmbda, args.epsilon, args.adv_steps)
 
         bpp_anchor.append(result_anchor['bpp'])
         bpp_retrained.append(result_retrained['bpp'])
         bpp_adv_anchor.append(result_adv_anchor['bpp'])
         bpp_adv_retrained.append(result_adv_retrained['bpp'])
+        bpp_adv_ideal_anchor.append(result_adv_ideal_anchor['bpp'])
+        bpp_adv_ideal_retrained.append(result_adv_ideal_retrained['bpp'])
 
         psnr_anchor.append(result_anchor['psnr'])
         psnr_retrained.append(result_retrained['psnr'])
         psnr_adv_anchor.append(result_adv_anchor['psnr'])
         psnr_adv_retrained.append(result_adv_retrained['psnr'])
+        psnr_adv_ideal_anchor.append(result_adv_ideal_anchor['psnr'])
+        psnr_adv_ideal_retrained.append(result_adv_ideal_retrained['psnr'])
 
     pltname = generat_plot_name(args.model, args.parameter_set, args.epsilon, args.adv_steps)
-    plot([bpp_anchor, bpp_retrained, bpp_adv_anchor, bpp_adv_retrained], [psnr_anchor, psnr_retrained, psnr_adv_anchor, psnr_adv_retrained], [args.model, args.model+'*', args.model+"(adv)", args.model+'*(adv)'], 'Kodak', os.path.join(ROOTDIR, pltname))
+    plot([bpp_anchor, bpp_retrained, bpp_adv_anchor, bpp_adv_retrained, bpp_adv_ideal_anchor, bpp_adv_ideal_retrained], [psnr_anchor, psnr_retrained, psnr_adv_anchor, psnr_adv_retrained, psnr_adv_ideal_anchor, psnr_adv_ideal_retrained], [args.model, args.model+'*', args.model+"(adv)", args.model+'*(adv)', args.model+"(adv-ideal)", args.model+'*(adv-ideal)'], 'Kodak', os.path.join(ROOTDIR, pltname))

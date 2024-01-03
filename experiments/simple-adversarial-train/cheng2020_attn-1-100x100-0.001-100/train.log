@@ -1,0 +1,9 @@
+[2024-01-02 07:47:41,453 | INFO | <module>] Args: Namespace(model='cheng2020_attn', parameter_set=1, epsilon=0.001, adv_steps=100, batch_size=8, epochs=100, steps_per_epoch=100, learning_rate=0.0001, save=True, seed=19260817, clip_max_norm=-1.0, checkpoint=None, type='mse', lr_epoch=[5], continue_train=False)
+[2024-01-02 07:47:41,453 | INFO | <module>] Lmbda=0.008543722500
+[2024-01-02 07:47:41,455 | INFO | train_one_epoch] Learning rate: 0.0001
+[2024-01-02 07:47:56,836 | INFO | train_one_epoch] Train epoch 0: [0/100 (0.00%)] 	bpp_y_loss: 0.168747 |	bpp_z_loss: 0.002711 |	bpp_loss: 0.171458 |	mse_loss: 0.000973 |	loss: 0.002438 |	psnr_loss: 30.119371 |
+[2024-01-02 07:49:34,573 | INFO | train_one_epoch] Train epoch 0: [10/100 (10.00%)] 	bpp_y_loss: 0.159266 |	bpp_z_loss: 0.002390 |	bpp_loss: 0.161656 |	mse_loss: 0.000911 |	loss: 0.002292 |	psnr_loss: 30.539404 |
+[2024-01-02 07:51:12,538 | INFO | train_one_epoch] Train epoch 0: [20/100 (20.00%)] 	bpp_y_loss: 0.150887 |	bpp_z_loss: 0.002218 |	bpp_loss: 0.153105 |	mse_loss: 0.000709 |	loss: 0.002017 |	psnr_loss: 31.691181 |
+[2024-01-02 07:52:50,454 | INFO | train_one_epoch] Train epoch 0: [30/100 (30.00%)] 	bpp_y_loss: 0.151168 |	bpp_z_loss: 0.002305 |	bpp_loss: 0.153473 |	mse_loss: 0.000723 |	loss: 0.002035 |	psnr_loss: 31.441633 |
+[2024-01-02 07:54:28,333 | INFO | train_one_epoch] Train epoch 0: [40/100 (40.00%)] 	bpp_y_loss: 0.157986 |	bpp_z_loss: 0.002325 |	bpp_loss: 0.160312 |	mse_loss: 0.000715 |	loss: 0.002085 |	psnr_loss: 31.619184 |
+[2024-01-02 07:56:06,228 | INFO | train_one_epoch] Train epoch 0: [50/100 (50.00%)] 	bpp_y_loss: 0.151967 |	bpp_z_loss: 0.002270 |	bpp_loss: 0.154236 |	mse_loss: 0.000671 |	loss: 0.001989 |	psnr_loss: 31.804098 |
