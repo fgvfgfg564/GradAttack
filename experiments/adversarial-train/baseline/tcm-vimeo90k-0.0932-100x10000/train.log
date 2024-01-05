@@ -1,0 +1,4 @@
+[2024-01-05 03:15:47,927 | INFO | <module>] Args: Namespace(model='tcm', lmbda=0.0932, dataset='vimeo90k', batch_size=4, epochs=100, steps_per_epoch=10000, learning_rate=0.0001, save=True, seed=19260817, clip_max_norm=-1.0, checkpoint=None, type='mse', lr_epoch=[5], continue_train=False)
+[2024-01-05 03:15:47,927 | INFO | <module>] Lmbda=0.093200000000
+[2024-01-05 03:15:47,935 | INFO | train_one_epoch] Learning rate: 0.0001
+[2024-01-05 03:15:52,591 | INFO | train_one_epoch] Train epoch 0: [0/10000 (0.00%)] 	bpp_y_loss: 1.930313 |	bpp_z_loss: 0.253543 |	bpp_loss: 2.183856 |	mse_loss: 0.247869 |	loss: 1504.351685 |	psnr_loss: 6.057778 |

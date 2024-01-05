@@ -1,0 +1,14 @@
+[2024-01-05 03:13:25,118 | INFO | <module>] Args: Namespace(model='tcm', lmbda=0.0018, dataset='vimeo90k', batch_size=8, epochs=100, steps_per_epoch=10000, learning_rate=0.0001, save=True, seed=19260817, clip_max_norm=-1.0, checkpoint=None, type='mse', lr_epoch=[5], continue_train=False)
+[2024-01-05 03:13:25,119 | INFO | <module>] Lmbda=0.001800000000
+[2024-01-05 03:13:25,124 | INFO | train_one_epoch] Learning rate: 0.0001
+[2024-01-05 03:14:03,821 | INFO | <module>] Args: Namespace(model='tcm', lmbda=0.0018, dataset='vimeo90k', batch_size=8, epochs=100, steps_per_epoch=10000, learning_rate=0.0001, save=True, seed=19260817, clip_max_norm=-1.0, checkpoint=None, type='mse', lr_epoch=[5], continue_train=False)
+[2024-01-05 03:14:03,822 | INFO | <module>] Lmbda=0.001800000000
+[2024-01-05 03:14:03,828 | INFO | train_one_epoch] Learning rate: 0.0001
+[2024-01-05 03:14:31,630 | INFO | <module>] Args: Namespace(model='tcm', lmbda=0.0018, dataset='vimeo90k', batch_size=6, epochs=100, steps_per_epoch=10000, learning_rate=0.0001, save=True, seed=19260817, clip_max_norm=-1.0, checkpoint=None, type='mse', lr_epoch=[5], continue_train=False)
+[2024-01-05 03:14:31,631 | INFO | <module>] Lmbda=0.001800000000
+[2024-01-05 03:14:31,637 | INFO | train_one_epoch] Learning rate: 0.0001
+[2024-01-05 03:14:36,338 | INFO | train_one_epoch] Train epoch 0: [0/10000 (0.00%)] 	bpp_y_loss: 1.800271 |	bpp_z_loss: 0.253542 |	bpp_loss: 2.053813 |	mse_loss: 0.196777 |	loss: 25.085567 |	psnr_loss: 7.060259 |
+[2024-01-05 03:14:46,416 | INFO | <module>] Args: Namespace(model='tcm', lmbda=0.0018, dataset='vimeo90k', batch_size=4, epochs=100, steps_per_epoch=10000, learning_rate=0.0001, save=True, seed=19260817, clip_max_norm=-1.0, checkpoint=None, type='mse', lr_epoch=[5], continue_train=False)
+[2024-01-05 03:14:46,417 | INFO | <module>] Lmbda=0.001800000000
+[2024-01-05 03:14:46,422 | INFO | train_one_epoch] Learning rate: 0.0001
+[2024-01-05 03:14:50,450 | INFO | train_one_epoch] Train epoch 0: [0/10000 (0.00%)] 	bpp_y_loss: 1.930313 |	bpp_z_loss: 0.253543 |	bpp_loss: 2.183856 |	mse_loss: 0.247869 |	loss: 31.195683 |	psnr_loss: 6.057778 |

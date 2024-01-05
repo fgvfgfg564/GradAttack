@@ -4,3 +4,6 @@ __pycache__
 tensorboard/
 *.tar.gz
 *.pth.tar
+build/
+*.so
+coding_tools

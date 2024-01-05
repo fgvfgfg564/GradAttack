@@ -8,11 +8,10 @@ import numpy as np
 from torchsummary import summary
 from torch.utils.tensorboard import SummaryWriter
 
-from adversarial_trainer import AdversarialTrainer
-from lib.trainer import save_checkpoint
+from lib.trainer import Trainer, save_checkpoint
 from dataset import *
 from criterion import RateDistortionLoss
-from nets import load_model, load_lmbda
+from nets import load_model, load_lmbda, MODELS
 
 ROOTDIR = os.path.split(__file__)[0]
 
@@ -20,13 +19,11 @@ def parse_args(argv):
     parser = argparse.ArgumentParser(description="Simple adversarial training for LIC.")
 
     # model parameters
-    parser.add_argument("model", type=str)
-    parser.add_argument("parameter_set", type=int)  # Always load pretrained models
+    parser.add_argument("model", type=str, choices=list(MODELS.keys()))
 
-    # Adversarial parameters
-    parser.add_argument("--epsilon", type=float, default=0.01)
-    parser.add_argument("--adv_steps", type=int, default=100)
+    parser.add_argument("--lmbda", type=float)
 
+    parser.add_argument('--dataset', type=str, choices=['vimeo90k', 'liu4k'])
     parser.add_argument("--batch_size", type=int, default=8)
     parser.add_argument(
         "-e",
@@ -35,9 +32,10 @@ def parse_args(argv):
         type=int,
         help="Number of epochs (default: %(default)s)",
     )
+    ## TCM is trained with batch_size=4
     parser.add_argument(
         "--steps_per_epoch",
-        default=100,
+        default=10000,
         type=int,
         help="Steps per epoch (default: %(default)s)",
     )
@@ -72,12 +70,12 @@ def parse_args(argv):
     args = parser.parse_args(argv)
     return args
 
-def generate_exp_name(model, parameter_set, epochs, steps_per_epoch, epsilon, adv_steps):
-    return f"{model}-{parameter_set}-{epochs}x{steps_per_epoch}-{epsilon}-{adv_steps}"
+def generate_exp_name(model, train_dataset, lmbda, epochs, steps_per_epoch):
+    return f"baseline/{model}-{train_dataset}-{lmbda}-{epochs}x{steps_per_epoch}"
 
 if __name__ == '__main__':
     args = parse_args(sys.argv[1:])
-    save_path = os.path.join(ROOTDIR, generate_exp_name(args.model, args.parameter_set, args.epochs, args.steps_per_epoch, args.epsilon, args.adv_steps))
+    save_path = os.path.join(ROOTDIR, generate_exp_name(args.model, args.dataset, args.lmbda, args.epochs, args.steps_per_epoch))
     tb_path = os.path.join(save_path, "tensorboard/")
     if not os.path.exists(save_path):
         os.makedirs(save_path)
@@ -91,15 +89,18 @@ if __name__ == '__main__':
 
     device = "cuda"
 
-    net = load_model(args.model, args.parameter_set)
-    lmbda = load_lmbda(args.model, args.parameter_set)
+    net = load_model(args.model).to(device)
+    lmbda = args.lmbda
 
-    train_dataset = Vimeo90KRandom(256)
+    if args.dataset == 'vimeo90k':
+        train_dataset = Vimeo90KRandom(256)
+    else:
+        raise ValueError()
     test_dataset = Kodak(512)
-    train_dataloader = DataLoader(train_dataset, args.batch_size, shuffle=True, pin_memory=True, pin_memory_device=device)
-    test_dataloader = DataLoader(test_dataset, batch_size=1, shuffle=False, pin_memory=True, pin_memory_device=device)
+    train_dataloader = DataLoader(train_dataset, args.batch_size, shuffle=True, pin_memory=True, pin_memory_device=device, num_workers=6)
+    test_dataloader = DataLoader(test_dataset, batch_size=1, shuffle=False, pin_memory=True, pin_memory_device=device, num_workers=1)
 
-    trainer = AdversarialTrainer(
+    trainer = Trainer(
         params=net.parameters(),
         lr=args.learning_rate,
         optimizer_class=lambda params, lr: torch.optim.Adam(params=params, lr=lr),
@@ -112,9 +113,7 @@ if __name__ == '__main__':
         writer=writer,
         device=device,
         save_path=save_path,
-        epsilon=args.epsilon,
-        adv_steps=args.adv_steps,
-        output_interval=10,
+        output_interval=1000,
     )
     trainer.logger.info("Args: " + args.__str__())
     trainer.logger.info(f"Lmbda={lmbda:.12f}")
@@ -130,7 +129,6 @@ if __name__ == '__main__':
         net.train()
         trainer.train_one_epoch(net)
         net.eval()
-        trainer.test_adversarial(net)
         is_best = trainer.test_one_epoch(net)
 
         if args.save:

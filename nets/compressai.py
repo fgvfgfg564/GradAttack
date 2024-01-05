@@ -11,18 +11,24 @@ def translate_lambda(lmbda_cai):
 
 LMBDAS_MSE_CAI = [0] + COMPRESSAI_LAMBDAS['MSE']
 
+def load_compressai_model(model_cls, quality):
+    if quality is None:
+        return model_cls(1, pretrained=False)
+    else:
+        return model_cls(quality, pretrained=True)
+
 @register_model('bmshj2018_factorized', LMBDAS_MSE_CAI)
 def bmshj2018_factorized(quality):
-    return czoo.bmshj2018_factorized(quality, pretrained=True)
+    return load_compressai_model(czoo.bmshj2018_factorized, quality)
 
 @register_model('bmshj2018_hyperprior', LMBDAS_MSE_CAI)
 def bmshj2018_hyperprior(quality):
-    return czoo.bmshj2018_hyperprior(quality, pretrained=True)
+    return load_compressai_model(czoo.bmshj2018_hyperprior, quality)
 
 @register_model('mbt2018', LMBDAS_MSE_CAI)
 def mbt2018(quality):
-    return czoo.mbt2018(quality, pretrained=True)
+    return load_compressai_model(czoo.mbt2018, quality)
 
 @register_model('cheng2020_attn', LMBDAS_MSE_CAI)
 def cheng2020_attn(quality):
-    return czoo.cheng2020_attn(quality, pretrained=True)
+    return load_compressai_model(czoo.cheng2020_attn, quality)
