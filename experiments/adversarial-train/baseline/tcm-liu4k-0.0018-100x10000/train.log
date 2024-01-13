@@ -276,3 +276,7 @@
 [2024-01-13 08:02:55,616 | INFO | train_one_epoch] Learning rate: 5e-05
 [2024-01-13 08:02:57,100 | INFO | train_one_epoch] Train epoch 21: [0/10000 (0.00%)] 	bpp_y_loss: 0.290453 |	bpp_z_loss: 0.004704 |	bpp_loss: 0.295158 |	mse_loss: 0.000817 |	loss: 0.390820 |	psnr_loss: 30.876141 |
 [2024-01-13 08:10:30,262 | INFO | train_one_epoch] Train epoch 21: [1000/10000 (10.00%)] 	bpp_y_loss: 0.254618 |	bpp_z_loss: 0.004929 |	bpp_loss: 0.259547 |	mse_loss: 0.001144 |	loss: 0.393502 |	psnr_loss: 30.416182 |
+[2024-01-13 08:17:58,119 | INFO | train_one_epoch] Train epoch 21: [2000/10000 (20.00%)] 	bpp_y_loss: 0.255963 |	bpp_z_loss: 0.004919 |	bpp_loss: 0.260882 |	mse_loss: 0.001178 |	loss: 0.398708 |	psnr_loss: 30.414551 |
+[2024-01-13 08:25:23,912 | INFO | train_one_epoch] Train epoch 21: [3000/10000 (30.00%)] 	bpp_y_loss: 0.254235 |	bpp_z_loss: 0.004908 |	bpp_loss: 0.259143 |	mse_loss: 0.001115 |	loss: 0.389590 |	psnr_loss: 30.563833 |
+[2024-01-13 08:32:51,616 | INFO | train_one_epoch] Train epoch 21: [4000/10000 (40.00%)] 	bpp_y_loss: 0.252913 |	bpp_z_loss: 0.004904 |	bpp_loss: 0.257816 |	mse_loss: 0.001084 |	loss: 0.384733 |	psnr_loss: 30.633253 |
+[2024-01-13 08:40:17,927 | INFO | train_one_epoch] Train epoch 21: [5000/10000 (50.00%)] 	bpp_y_loss: 0.255986 |	bpp_z_loss: 0.004951 |	bpp_loss: 0.260937 |	mse_loss: 0.001160 |	loss: 0.396723 |	psnr_loss: 30.337769 |

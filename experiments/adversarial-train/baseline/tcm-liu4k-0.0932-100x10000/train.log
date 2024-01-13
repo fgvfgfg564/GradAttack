@@ -270,3 +270,11 @@
 [2024-01-13 07:50:25,186 | INFO | train_one_epoch] Train epoch 20: [6000/10000 (60.00%)] 	bpp_y_loss: 0.952348 |	bpp_z_loss: 0.015819 |	bpp_loss: 0.968167 |	mse_loss: 0.000193 |	loss: 2.136612 |	psnr_loss: 37.693062 |
 [2024-01-13 07:57:59,548 | INFO | train_one_epoch] Train epoch 20: [7000/10000 (70.00%)] 	bpp_y_loss: 0.971746 |	bpp_z_loss: 0.015863 |	bpp_loss: 0.987609 |	mse_loss: 0.000214 |	loss: 2.285304 |	psnr_loss: 37.425617 |
 [2024-01-13 08:05:24,050 | INFO | train_one_epoch] Train epoch 20: [8000/10000 (80.00%)] 	bpp_y_loss: 0.968298 |	bpp_z_loss: 0.015890 |	bpp_loss: 0.984188 |	mse_loss: 0.000209 |	loss: 2.248844 |	psnr_loss: 37.425701 |
+[2024-01-13 08:12:46,691 | INFO | train_one_epoch] Train epoch 20: [9000/10000 (90.00%)] 	bpp_y_loss: 0.974680 |	bpp_z_loss: 0.015839 |	bpp_loss: 0.990519 |	mse_loss: 0.000206 |	loss: 2.241802 |	psnr_loss: 37.508694 |
+[2024-01-13 08:20:07,674 | INFO | train_one_epoch] Train epoch 20: [10000/10000 (100.00%)] 	bpp_y_loss: 0.969194 |	bpp_z_loss: 0.015806 |	bpp_loss: 0.984999 |	mse_loss: 0.000201 |	loss: 2.203835 |	psnr_loss: 37.573215 |
+[2024-01-13 08:20:11,290 | INFO | test_one_epoch] Testing results for epoch 21 | bpp_y_loss=1.20901 | bpp_z_loss=0.01623 | bpp_loss=1.22524 | mse_loss=0.00027 | loss=2.86036 | psnr_loss=36.14646
+[2024-01-13 08:20:50,327 | INFO | train_one_epoch] Learning rate: 5e-05
+[2024-01-13 08:20:51,304 | INFO | train_one_epoch] Train epoch 21: [0/10000 (0.00%)] 	bpp_y_loss: 1.049385 |	bpp_z_loss: 0.017159 |	bpp_loss: 1.066544 |	mse_loss: 0.000121 |	loss: 1.797216 |	psnr_loss: 39.187740 |
+[2024-01-13 08:28:12,804 | INFO | train_one_epoch] Train epoch 21: [1000/10000 (10.00%)] 	bpp_y_loss: 0.967346 |	bpp_z_loss: 0.015858 |	bpp_loss: 0.983204 |	mse_loss: 0.000198 |	loss: 2.184674 |	psnr_loss: 37.627102 |
+[2024-01-13 08:35:33,438 | INFO | train_one_epoch] Train epoch 21: [2000/10000 (20.00%)] 	bpp_y_loss: 0.966630 |	bpp_z_loss: 0.015822 |	bpp_loss: 0.982452 |	mse_loss: 0.000208 |	loss: 2.245045 |	psnr_loss: 37.520496 |
+[2024-01-13 08:42:55,083 | INFO | train_one_epoch] Train epoch 21: [3000/10000 (30.00%)] 	bpp_y_loss: 0.955609 |	bpp_z_loss: 0.015815 |	bpp_loss: 0.971424 |	mse_loss: 0.000201 |	loss: 2.187275 |	psnr_loss: 37.614628 |
