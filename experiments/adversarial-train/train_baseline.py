@@ -42,7 +42,7 @@ def parse_args(argv):
     parser.add_argument(
         "-lr",
         "--learning_rate",
-        default=1e-4,
+        default=5e-5,
         type=float,
         help="Learning rate (default: %(default)s)",
     )
@@ -57,7 +57,7 @@ def parse_args(argv):
     )
     parser.add_argument(
         "--clip_max_norm",
-        default=-1.,
+        default=1.0,
         type=float,
         help="gradient clipping max norm (default: %(default)s",
     )
@@ -65,7 +65,7 @@ def parse_args(argv):
     parser.add_argument(
         "--type", type=str, default="mse", help="loss type", choices=["mse", "ms-ssim"]
     )
-    parser.add_argument("--lr_epoch", nargs="+", type=int, default=[5])
+    parser.add_argument("--lr_epoch", nargs="+", type=int, default=[40])
     parser.add_argument("--continue_train", action="store_true", default=False)
     args = parser.parse_args(argv)
     return args
@@ -94,12 +94,14 @@ if __name__ == '__main__':
 
     if args.dataset == 'vimeo90k':
         train_dataset = Vimeo90KRandom(256)
+    elif args.dataset == 'liu4k':
+        train_dataset = LIU4KPatches() 
     else:
         raise ValueError()
     test_dataset = Kodak(512)
     train_dataloader = DataLoader(train_dataset, args.batch_size, shuffle=True, pin_memory=True, pin_memory_device=device, num_workers=6)
     test_dataloader = DataLoader(test_dataset, batch_size=1, shuffle=False, pin_memory=True, pin_memory_device=device, num_workers=1)
-
+ 
     trainer = Trainer(
         params=net.parameters(),
         lr=args.learning_rate,

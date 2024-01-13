@@ -20,7 +20,7 @@ class SingleImage(Dataset):
 
 class Vimeo90KRandom(Dataset):
     NUM_SEQUENCES = 95936
-    ROOT = '/home/xyhang/dataset/vimeo_septuplet/sequences/'
+    ROOT = os.path.expanduser('~/dataset/vimeo_septuplet/sequences/')
 
     def __init__(self, patch_size) -> None:
         self.patch_size = patch_size
@@ -45,6 +45,26 @@ class Vimeo90KRandom(Dataset):
             img = RandomCrop(self.patch_size)(img)
         return img
 
+class LIU4KPatches(Dataset):
+    """
+    Patch size = 256
+    """
+    GLOB = os.path.expanduser('~/dataset/LIU4K_patch/*/*.png')
+
+    def __init__(self):
+        self.image_list = glob.glob(self.GLOB)
+        self.len_image_list = len(self.image_list)
+        self.patch_size = 256
+    
+    def __len__(self):
+        return self.len_image_list
+    
+    def __getitem__(self, idx):
+        filename = self.image_list[idx]
+        img = Image.open(filename)
+        img = ToTensor()(img)
+        return img
+
 class Kodak(Dataset):
     """
     Randomized image patchifier with a buffer
@@ -53,7 +73,7 @@ class Kodak(Dataset):
 
     def __init__(self, patch_size=512) -> None:
         super().__init__()
-        dataset_glob = "/home/xyhang/dataset/kodak/*.png"
+        dataset_glob = os.path.expanduser('~/dataset/kodak/*.png')
         self.image_list = glob.glob(dataset_glob)
         self.len_image_list = len(self.image_list)
         self.patch_size = patch_size
