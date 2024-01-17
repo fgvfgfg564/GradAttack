@@ -24,7 +24,7 @@ def cosine_decay(init_lr, step, num_steps, alpha):
     return alpha * init_lr + (1-alpha) * a
 
 @torch.enable_grad()
-def attack(net: nn.Module, img: torch.Tensor, criterion, num_steps=100, init_lr=1e-3, epsilon=.01, inverse=False) -> torch.Tensor:
+def attack(net: nn.Module, img: torch.Tensor, criterion, optimizer_class=torch.optim.Adam, num_steps=100, init_lr=1e-3, epsilon=.01, inverse=False, show_info=False) -> torch.Tensor:
     """
     Adversarial attack using Projected ADAM optimizer
     """
@@ -41,7 +41,7 @@ def attack(net: nn.Module, img: torch.Tensor, criterion, num_steps=100, init_lr=
         noise = nn.Parameter(epsilon*(torch.rand_like(img)-0.5))
     # print(input)
     net = net.cuda()
-    optimizer = torch.optim.Adam((noise,), init_lr)
+    optimizer = optimizer_class((noise,), init_lr)
     net.train()
     for i in range(num_steps):
         optimizer.param_groups[0]['lr'] = cosine_decay(init_lr, i, num_steps, 0.01)
@@ -58,7 +58,7 @@ def attack(net: nn.Module, img: torch.Tensor, criterion, num_steps=100, init_lr=
             loss_rd = - out_criterion['loss']
         loss = loss_rd
 
-        if i % 10 == 0:
+        if show_info:
             print(f"Step: {i} "
               f"Loss: {loss.detach().cpu()} "
               f"PSNR_rd: {out_criterion['psnr_loss'].detach().cpu()} " 

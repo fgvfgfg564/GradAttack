@@ -49,6 +49,9 @@ class Trainer:
 
         self.config_logger()
     
+    def forward_hook(self, forward_func, x):
+        return x
+    
     @torch.enable_grad()
     def train_one_epoch(self, forward_func):
         if self.logger is not None:
@@ -62,6 +65,8 @@ class Trainer:
                 for each in d:
                     d_new.append(each.to(self.device))
                 d = tuple(d_new)
+            
+            d = self.forward_hook(forward_func, d)
             out_net = forward_func(d)
             out_criterion = self.criterion(out_net, d)
             

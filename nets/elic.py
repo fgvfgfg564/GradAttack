@@ -1,21 +1,134 @@
 import math
+from typing import Any
 import warnings
 import torch
 import torch.nn as nn
 import torch.nn.functional as F
+from torch import Tensor
 from torch.distributions.uniform import Uniform
 from compressai.ans import BufferedRansEncoder, RansDecoder
 from compressai.entropy_models import EntropyBottleneck, GaussianConditional
-from compressai.layers import MultistageMaskedConv2d
 from compressai.layers import (
     AttentionBlock,
-    ResidualBottleneckBlock,
     conv3x3,
     subpel_conv3x3,
 )
-from compressai.models.utils import conv, deconv, update_registered_buffers, Demultiplexer, Multiplexer,quantize_ste, Demultiplexerv2, Multiplexerv2
+from compressai.models.utils import conv, deconv, update_registered_buffers, quantize_ste
 from .registry import register_model
 
+
+class Space2Depth(nn.Module):
+    """
+    ref: https://github.com/huzi96/Coarse2Fine-PyTorch/blob/master/networks.py
+    """
+
+    def __init__(self, r=2):
+        super().__init__()
+        self.r = r
+
+    def forward(self, x):
+        r = self.r
+        b, c, h, w = x.size()
+        out_c = c * (r**2)
+        out_h = h // r
+        out_w = w // r
+        x_view = x.view(b, c, out_h, r, out_w, r)
+        x_prime = x_view.permute(0, 3, 5, 1, 2, 4).contiguous().view(b, out_c, out_h, out_w)
+        return x_prime
+
+
+class Depth2Space(nn.Module):
+    def __init__(self, r=2):
+        super().__init__()
+        self.r = r
+
+    def forward(self, x):
+        r = self.r
+        b, c, h, w = x.size()
+        out_c = c // (r**2)
+        out_h = h * r
+        out_w = w * r
+        x_view = x.view(b, r, r, out_c, h, w)
+        x_prime = x_view.permute(0, 3, 4, 1, 5, 2).contiguous().view(b, out_c, out_h, out_w)
+        return x_prime
+
+def Demultiplexerv2(x):
+    x_prime = Space2Depth(r=2)(x)
+    
+    _, C, _, _ = x_prime.shape
+    y1_index = tuple(range(0, C // 4))
+    y2_index = tuple(range(C * 3 // 4, C))
+    y3_index = tuple(range(C // 4, C // 2))
+    y4_index = tuple(range(C // 2, C * 3 // 4))
+
+    y1 = x_prime[:, y1_index, :, :]
+    y2 = x_prime[:, y2_index, :, :]
+    y3 = x_prime[:, y3_index, :, :]
+    y4 = x_prime[:, y4_index, :, :]
+
+    return y1, y2, y3, y4
+
+
+def Multiplexerv2(y1, y2, y3, y4):
+    x_prime = torch.cat((y1, y3, y4, y2), dim=1)
+    return Depth2Space(r=2)(x_prime)
+
+def conv1x1(in_ch: int, out_ch: int, stride: int = 1) -> nn.Module:
+    """1x1 convolution."""
+    return nn.Conv2d(in_ch, out_ch, kernel_size=1, stride=stride)
+
+class MultistageMaskedConv2d(nn.Conv2d):
+    def __init__(self, *args: Any, mask_type: str = "A", **kwargs: Any):
+        super().__init__(*args, **kwargs)
+
+        self.register_buffer("mask", torch.zeros_like(self.weight.data))
+
+        if mask_type == 'A':
+            self.mask[:, :, 0::2, 0::2] = 1
+        elif mask_type == 'B':
+            self.mask[:, :, 0::2, 1::2] = 1
+            self.mask[:, :, 1::2, 0::2] = 1
+        elif mask_type == 'C':
+            self.mask[:, :, :, :] = 1
+            self.mask[:, :, 1:2, 1:2] = 0
+        else:
+            raise ValueError(f'Invalid "mask_type" value "{mask_type}"')
+
+    def forward(self, x: Tensor) -> Tensor:
+        # TODO: weight assigment is not supported by torchscript
+        self.weight.data *= self.mask
+        return super().forward(x)
+
+class ResidualBottleneckBlock(nn.Module):
+    """Simple residual block with two 3x3 convolutions.
+
+    Args:
+        in_ch (int): number of input channels
+        out_ch (int): number of output channels
+    """
+
+    def __init__(self, in_ch: int, out_ch: int):
+        super().__init__()
+        self.conv1 = conv1x1(in_ch, out_ch//2)
+        self.conv2 = conv3x3(out_ch//2, out_ch//2)
+        self.conv3 = conv1x1(out_ch//2, out_ch)
+        self.leaky_relu = nn.LeakyReLU(inplace=True)
+        if in_ch != out_ch:
+            self.skip = conv1x1(in_ch, out_ch)
+        else:
+            self.skip = None
+
+    def forward(self, x: Tensor) -> Tensor:
+        identity = x
+        out = self.conv1(x)
+        out = self.leaky_relu(out)
+        out = self.conv2(out)
+        out = self.leaky_relu(out)
+        out = self.conv3(out)
+        if self.skip is not None:
+            identity = self.skip(x)
+        out = out + identity
+        return out
 
 class UniversalQuant(torch.autograd.Function):
     @ staticmethod

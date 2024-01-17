@@ -2,8 +2,8 @@ import torch
 import torch.nn as nn
 import torch.nn.functional as F
 from compressai.layers import subpel_conv3x3, AttentionBlock
-from modules.layers.conv import conv1x1, conv3x3, conv, deconv
-from modules.layers.res_blk import *
+from ..layers.conv import conv1x1, conv3x3, conv, deconv
+from ..layers.res_blk import *
 
 
 class HyperSynthesis(nn.Module):

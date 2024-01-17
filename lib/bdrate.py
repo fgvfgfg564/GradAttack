@@ -42,8 +42,8 @@ def BD_PSNR(R1, PSNR1, R2, PSNR2, piecewise=0):
 
 
 def BD_RATE(R1, PSNR1, R2, PSNR2, piecewise=0):
-    lR1 = np.log(R1)
-    lR2 = np.log(R2)
+    lR1 = np.log10(R1)
+    lR2 = np.log10(R2)
 
     # rate method
     p1 = np.polyfit(PSNR1, lR1, 3)
@@ -72,6 +72,12 @@ def BD_RATE(R1, PSNR1, R2, PSNR2, piecewise=0):
 
     # find avg diff
     avg_exp_diff = (int2 - int1) / (max_int - min_int)
-    avg_diff = (np.exp(avg_exp_diff) - 1) * 100
+    avg_diff = (np.power(10, avg_exp_diff) - 1) * 100
     return avg_diff
 
+if __name__ == '__main__':
+    bpp1 = np.array([0.4,0.6,0.8,1.0])
+    psnr1 = np.array([30, 32, 34, 36])
+    bpp2 = np.array([0.4,0.6,0.8,1.0])
+    psnr2 = np.array([32,34,36,38])
+    print(BD_RATE(bpp1, np.log(psnr1), bpp2, np.log(psnr2), 1))

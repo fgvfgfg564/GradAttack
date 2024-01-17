@@ -14,4 +14,4 @@ def load_json(filename):
 def dump_json(obj, filename):
     make_folder(filename)
     with open(filename, "w") as f:
-        json.dump(obj, f)
+        json.dump(obj, f, indent=4, sort_keys=True)
