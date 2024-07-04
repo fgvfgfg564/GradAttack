@@ -1,0 +1,2 @@
+[2024-07-04 02:53:13,075 | INFO | <module>] Args: Namespace(model='bmshj2018_hyperprior', lmbda=0.0018, dataset='liu4k', epochs=100, steps_per_epoch=10000, type='mse', steps=1000, test_dataset='kodak', adv_steps=10, adv_optimizer='SGD', adv_lr=1000.0, adv_epsilon=0.01, batch_size=8, learning_rate=1e-05, save=True, seed=19260817, clip_max_norm=1.0, checkpoint=None, continue_train=False)
+[2024-07-04 02:53:13,076 | INFO | <module>] Lmbda=0.001800000000

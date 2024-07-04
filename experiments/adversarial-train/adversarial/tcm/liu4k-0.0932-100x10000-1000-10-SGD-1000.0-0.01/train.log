@@ -1,0 +1,7 @@
+[2024-01-22 06:58:11,272 | INFO | <module>] Args: Namespace(model='tcm', lmbda=0.0932, dataset='liu4k', epochs=100, steps_per_epoch=10000, type='mse', steps=1000, test_dataset='kodak', adv_steps=10, adv_optimizer='SGD', adv_lr=1000.0, adv_epsilon=0.01, batch_size=4, learning_rate=1e-05, save=True, seed=19260817, clip_max_norm=1.0, checkpoint=None, continue_train=False)
+[2024-01-22 06:58:11,293 | INFO | <module>] Lmbda=0.093200000000
+[2024-01-22 06:58:11,293 | INFO | <module>] Load weights from /backup1/xyhang/GradAttack/experiments/adversarial-train/baseline/tcm-liu4k-0.0932-100x10000/last_epoch.pth.tar
+[2024-01-22 07:00:07,754 | INFO | test_one_epoch] Testing results for epoch 0 | bpp_y_loss=1.17982 | bpp_z_loss=0.02041 | bpp_loss=1.20023 | mse_loss=0.00015 | loss=2.13586 | psnr_loss=38.43815
+[2024-01-22 07:00:20,783 | INFO | train_one_epoch] Learning rate: 1e-05
+[2024-01-22 07:00:39,297 | INFO | train_one_epoch] Train epoch 0: [0/100 (0.00%)] 	bpp_y_loss: 1.195181 |	bpp_z_loss: 0.016873 |	bpp_loss: 1.212053 |	mse_loss: 0.000253 |	loss: 2.746784 |	psnr_loss: 35.964638 |
+[2024-01-22 07:01:30,058 | INFO | train_one_epoch] Train epoch 0: [10/100 (10.00%)] 	bpp_y_loss: 1.226995 |	bpp_z_loss: 0.017024 |	bpp_loss: 1.244019 |	mse_loss: 0.000283 |	loss: 2.956874 |	psnr_loss: 35.645046 |

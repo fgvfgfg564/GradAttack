@@ -20,6 +20,7 @@ ROOTDIR = os.path.split(__file__)[0]
 
 from train_baseline import add_key_args, generate_exp_name
 
+
 def parse_args(argv):
     parser = argparse.ArgumentParser(description="Simple adversarial training for LIC.")
 
@@ -28,10 +29,15 @@ def parse_args(argv):
     parser.add_argument("--steps", type=int, default=1000)
 
     # Adversarial args
+    parser.add_argument(
+        "--test_dataset", type=str, default="kodak", choices=DS_REGISTER.keys()
+    )
     parser.add_argument("--adv_steps", type=int, default=10)
-    parser.add_argument("--adv_optimizer", type=str, choices=['Adam', 'SGD'], default='Adam')
-    parser.add_argument("--adv_lr", type=float, default=1e-3)
-    parser.add_argument("--adv_epsilon", type=float, default=1e-3)
+    parser.add_argument(
+        "--adv_optimizer", type=str, choices=["Adam", "SGD"], default="SGD"
+    )
+    parser.add_argument("--adv_lr", type=float, default=1000.0)
+    parser.add_argument("--adv_epsilon", type=float, default=0.01)
 
     parser.add_argument("--batch_size", type=int, default=8)
     parser.add_argument(
@@ -61,12 +67,15 @@ def parse_args(argv):
     args = parser.parse_args(argv)
     return args
 
+
 def generate_adv_exp_name(args):
-    return (f"adversarial/{args.model}/{args.dataset}-{args.lmbda}-{args.epochs}x{args.steps_per_epoch}"
-            f"-{args.steps}-{args.adv_steps}-{args.adv_optimizer}-{args.adv_lr}-{args.adv_epsilon}"
+    return (
+        f"adversarial/{args.model}/{args.dataset}-{args.lmbda}-{args.epochs}x{args.steps_per_epoch}"
+        f"-{args.steps}-{args.adv_steps}-{args.adv_optimizer}-{args.adv_lr}-{args.adv_epsilon}"
     )
 
-if __name__ == '__main__':
+
+if __name__ == "__main__":
     args = parse_args(sys.argv[1:])
 
     if args.seed is not None:
@@ -87,16 +96,30 @@ if __name__ == '__main__':
     net = load_model(args.model).to(device)
     lmbda = args.lmbda
 
-    if args.dataset == 'vimeo90k':
+    if args.dataset == "vimeo90k":
         train_dataset = Vimeo90KRandom(256)
-    elif args.dataset == 'liu4k':
-        train_dataset = LIU4KPatches() 
+    elif args.dataset == "liu4k":
+        train_dataset = LIU4KPatches()
     else:
         raise ValueError()
     test_dataset = Kodak(None)
-    train_dataloader = DataLoader(train_dataset, args.batch_size, shuffle=True, pin_memory=True, pin_memory_device=device, num_workers=6)
-    test_dataloader = DataLoader(test_dataset, batch_size=1, shuffle=False, pin_memory=True, pin_memory_device=device, num_workers=1)
-    
+    train_dataloader = DataLoader(
+        train_dataset,
+        args.batch_size,
+        shuffle=True,
+        pin_memory=True,
+        pin_memory_device=device,
+        num_workers=6,
+    )
+    test_dataloader = DataLoader(
+        test_dataset,
+        batch_size=1,
+        shuffle=False,
+        pin_memory=True,
+        pin_memory_device=device,
+        num_workers=1,
+    )
+
     # Test adversarial performance
 
     adv_trainer = AdversarialTrainer(
@@ -116,11 +139,11 @@ if __name__ == '__main__':
         epsilon=args.adv_epsilon,
         adv_steps=args.adv_steps,
         adv_optimizer=args.adv_optimizer,
-        adv_lr=args.adv_lr
+        adv_lr=args.adv_lr,
     )
     adv_trainer.logger.info("Args: " + args.__str__())
     adv_trainer.logger.info(f"Lmbda={lmbda:.12f}")
-    
+
     if args.checkpoint:  # load from previous checkpoint
         adv_trainer.logger.info(f"Loading {args.checkpoint}")
         checkpoint = torch.load(args.checkpoint, map_location=device)
@@ -129,11 +152,14 @@ if __name__ == '__main__':
             adv_trainer.load_state_dict(checkpoint["trainer"])
     else:
         # Load from baseline
-        baseline_path = os.path.join(ROOTDIR, generate_exp_name(args.model, args.dataset, args.lmbda, args.epochs, args.steps_per_epoch))
-        ckptpath = os.path.join(baseline_path, 'last_epoch.pth.tar')
-        adv_trainer.logger.info('Load weights from ' + ckptpath)
+        baseline_path = os.path.join(
+            ROOTDIR,
+            generate_exp_name(args),
+        )
+        ckptpath = os.path.join(baseline_path, "last_epoch.pth.tar")
+        adv_trainer.logger.info("Load weights from " + ckptpath)
         checkpoint = torch.load(ckptpath, map_location=device)
-        net.load_state_dict(checkpoint['state_dict'])
+        net.load_state_dict(checkpoint["state_dict"])
 
     net.eval()
     adv_trainer.test_one_epoch(net)
@@ -147,8 +173,8 @@ if __name__ == '__main__':
 
     performance_new = test_on_dataset(net, test_dataloader)
 
-    dump_json(performance_baseline, os.path.join(save_path, 'baseline.json'))
-    dump_json(performance_new, os.path.join(save_path, 'adversarial.json'))
+    dump_json(performance_baseline, os.path.join(save_path, "baseline.json"))
+    dump_json(performance_new, os.path.join(save_path, "adversarial.json"))
 
     if args.save:
         save_checkpoint(

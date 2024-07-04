@@ -24,7 +24,7 @@ def add_key_args(parser):
     parser.add_argument("model", type=str, choices=list(MODELS.keys()))
 
     parser.add_argument("--lmbda", type=float, default=None)
-    parser.add_argument('--dataset', type=str, choices=['vimeo90k', 'liu4k'])
+    parser.add_argument("--dataset", type=str, choices=["vimeo90k", "liu4k"])
     parser.add_argument(
         "-e",
         "--epochs",
@@ -42,7 +42,6 @@ def add_key_args(parser):
     parser.add_argument(
         "--type", type=str, default="mse", help="loss type", choices=["mse", "ms-ssim"]
     )
-
 
 
 def parse_args(argv):
@@ -79,12 +78,14 @@ def parse_args(argv):
     args = parser.parse_args(argv)
     return args
 
-def generate_exp_name(model, train_dataset, lmbda, epochs, steps_per_epoch):
-    return f"baseline/{model}-{train_dataset}-{lmbda}-{epochs}x{steps_per_epoch}"
 
-if __name__ == '__main__':
+def generate_exp_name(args):
+    return f"baseline/{args.model}-{args.dataset}-{args.lmbda}-{args.epochs}x{args.steps_per_epoch}"
+
+
+if __name__ == "__main__":
     args = parse_args(sys.argv[1:])
-    save_path = os.path.join(ROOTDIR, generate_exp_name(args.model, args.dataset, args.lmbda, args.epochs, args.steps_per_epoch))
+    save_path = os.path.join(ROOTDIR, generate_exp_name(args))
     tb_path = os.path.join(save_path, "tensorboard/")
     if not os.path.exists(save_path):
         os.makedirs(save_path)
@@ -101,16 +102,30 @@ if __name__ == '__main__':
     net = load_model(args.model).to(device)
     lmbda = args.lmbda
 
-    if args.dataset == 'vimeo90k':
+    if args.dataset == "vimeo90k":
         train_dataset = Vimeo90KRandom(256)
-    elif args.dataset == 'liu4k':
-        train_dataset = LIU4KPatches() 
+    elif args.dataset == "liu4k":
+        train_dataset = LIU4KPatches()
     else:
         raise ValueError()
     test_dataset = Kodak(512)
-    train_dataloader = DataLoader(train_dataset, args.batch_size, shuffle=True, pin_memory=True, pin_memory_device=device, num_workers=6)
-    test_dataloader = DataLoader(test_dataset, batch_size=1, shuffle=False, pin_memory=True, pin_memory_device=device, num_workers=1)
- 
+    train_dataloader = DataLoader(
+        train_dataset,
+        args.batch_size,
+        shuffle=True,
+        pin_memory=True,
+        pin_memory_device=device,
+        num_workers=6,
+    )
+    test_dataloader = DataLoader(
+        test_dataset,
+        batch_size=1,
+        shuffle=False,
+        pin_memory=True,
+        pin_memory_device=device,
+        num_workers=1,
+    )
+
     trainer = Trainer(
         params=net.parameters(),
         lr=args.learning_rate,
@@ -128,10 +143,15 @@ if __name__ == '__main__':
     )
     trainer.logger.info("Args: " + args.__str__())
     trainer.logger.info(f"Lmbda={lmbda:.12f}")
-    
-    if args.checkpoint:  # load from previous checkpoint
-        trainer.logger.info(f"Loading {args.checkpoint}")
-        checkpoint = torch.load(args.checkpoint, map_location=device)
+
+    if args.checkpoint or args.continue_train:  # load from previous checkpoint
+        ckpt = (
+            os.path.join(save_path, "last_epoch.pth.tar")
+            if args.continue_train
+            else args.checkpoint
+        )
+        trainer.logger.info(f"Loading {ckpt}")
+        checkpoint = torch.load(ckpt, map_location=device)
         net.load_state_dict(checkpoint["state_dict"])
         if args.continue_train:
             trainer.load_state_dict(checkpoint["trainer"])

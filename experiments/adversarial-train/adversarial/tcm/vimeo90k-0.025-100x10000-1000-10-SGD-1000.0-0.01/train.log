@@ -1,0 +1,139 @@
+[2024-01-18 02:26:22,257 | INFO | <module>] Args: Namespace(model='tcm', lmbda=0.025, dataset='vimeo90k', epochs=100, steps_per_epoch=10000, type='mse', steps=1000, test_dataset='kodak', adv_steps=10, adv_optimizer='SGD', adv_lr=1000.0, adv_epsilon=0.01, batch_size=4, learning_rate=1e-05, save=True, seed=19260817, clip_max_norm=1.0, checkpoint=None, continue_train=False)
+[2024-01-18 02:26:22,257 | INFO | <module>] Lmbda=0.025000000000
+[2024-01-18 02:26:22,257 | INFO | <module>] Load weights from /backup1/xyhang/GradAttack/experiments/adversarial-train/baseline/tcm-vimeo90k-0.025-100x10000/last_epoch.pth.tar
+[2024-01-18 02:26:46,432 | INFO | test_one_epoch] Testing results for epoch 0 | bpp_y_loss=0.51130 | bpp_z_loss=0.01563 | bpp_loss=0.52694 | mse_loss=0.00044 | loss=1.24493 | psnr_loss=34.24951
+[2024-01-18 02:27:02,448 | INFO | train_one_epoch] Learning rate: 1e-05
+[2024-01-18 02:28:03,518 | INFO | <module>] Args: Namespace(model='tcm', lmbda=0.025, dataset='vimeo90k', epochs=100, steps_per_epoch=10000, type='mse', steps=1000, test_dataset='kodak', adv_steps=10, adv_optimizer='SGD', adv_lr=1000.0, adv_epsilon=0.01, batch_size=4, learning_rate=1e-05, save=True, seed=19260817, clip_max_norm=1.0, checkpoint=None, continue_train=False)
+[2024-01-18 02:28:03,518 | INFO | <module>] Lmbda=0.025000000000
+[2024-01-18 02:28:03,518 | INFO | <module>] Load weights from /backup1/xyhang/GradAttack/experiments/adversarial-train/baseline/tcm-vimeo90k-0.025-100x10000/last_epoch.pth.tar
+[2024-01-18 02:28:12,706 | INFO | test_one_epoch] Testing results for epoch 0 | bpp_y_loss=0.51130 | bpp_z_loss=0.01563 | bpp_loss=0.52694 | mse_loss=0.00044 | loss=1.24493 | psnr_loss=34.24951
+[2024-01-18 02:28:25,865 | INFO | train_one_epoch] Learning rate: 1e-05
+[2024-01-18 02:28:32,480 | INFO | train_one_epoch] Train epoch 0: [0/100 (0.00%)] 	bpp_y_loss: 0.554211 |	bpp_z_loss: 0.013288 |	bpp_loss: 0.567498 |	mse_loss: 0.000342 |	loss: 1.122754 |	psnr_loss: 34.665276 |
+[2024-01-18 02:29:24,098 | INFO | train_one_epoch] Train epoch 0: [10/100 (10.00%)] 	bpp_y_loss: 0.555776 |	bpp_z_loss: 0.013231 |	bpp_loss: 0.569007 |	mse_loss: 0.000376 |	loss: 1.179577 |	psnr_loss: 34.354618 |
+[2024-01-18 02:30:15,756 | INFO | train_one_epoch] Train epoch 0: [20/100 (20.00%)] 	bpp_y_loss: 0.560221 |	bpp_z_loss: 0.013272 |	bpp_loss: 0.573493 |	mse_loss: 0.000415 |	loss: 1.248321 |	psnr_loss: 34.082119 |
+[2024-01-18 02:31:07,614 | INFO | train_one_epoch] Train epoch 0: [30/100 (30.00%)] 	bpp_y_loss: 0.532575 |	bpp_z_loss: 0.013145 |	bpp_loss: 0.545720 |	mse_loss: 0.000386 |	loss: 1.173801 |	psnr_loss: 34.245739 |
+[2024-01-18 02:31:58,822 | INFO | train_one_epoch] Train epoch 0: [40/100 (40.00%)] 	bpp_y_loss: 0.534860 |	bpp_z_loss: 0.013152 |	bpp_loss: 0.548013 |	mse_loss: 0.000353 |	loss: 1.121893 |	psnr_loss: 34.644459 |
+[2024-01-18 02:32:51,027 | INFO | train_one_epoch] Train epoch 0: [50/100 (50.00%)] 	bpp_y_loss: 0.522776 |	bpp_z_loss: 0.013088 |	bpp_loss: 0.535864 |	mse_loss: 0.000365 |	loss: 1.128486 |	psnr_loss: 34.534039 |
+[2024-01-18 02:33:42,704 | INFO | train_one_epoch] Train epoch 0: [60/100 (60.00%)] 	bpp_y_loss: 0.517808 |	bpp_z_loss: 0.012568 |	bpp_loss: 0.530376 |	mse_loss: 0.000332 |	loss: 1.070502 |	psnr_loss: 34.928207 |
+[2024-01-18 02:34:34,540 | INFO | train_one_epoch] Train epoch 0: [70/100 (70.00%)] 	bpp_y_loss: 0.503988 |	bpp_z_loss: 0.013031 |	bpp_loss: 0.517019 |	mse_loss: 0.000326 |	loss: 1.047110 |	psnr_loss: 34.935516 |
+[2024-01-18 02:35:27,209 | INFO | train_one_epoch] Train epoch 0: [80/100 (80.00%)] 	bpp_y_loss: 0.527568 |	bpp_z_loss: 0.013064 |	bpp_loss: 0.540632 |	mse_loss: 0.000369 |	loss: 1.140215 |	psnr_loss: 34.373837 |
+[2024-01-18 02:36:18,871 | INFO | train_one_epoch] Train epoch 0: [90/100 (90.00%)] 	bpp_y_loss: 0.590455 |	bpp_z_loss: 0.013560 |	bpp_loss: 0.604015 |	mse_loss: 0.000439 |	loss: 1.317806 |	psnr_loss: 33.806732 |
+[2024-01-18 02:37:10,756 | INFO | train_one_epoch] Train epoch 0: [100/100 (100.00%)] 	bpp_y_loss: 0.519776 |	bpp_z_loss: 0.013183 |	bpp_loss: 0.532959 |	mse_loss: 0.000379 |	loss: 1.148528 |	psnr_loss: 34.433716 |
+[2024-01-18 02:37:15,802 | INFO | test_one_epoch] Testing results for epoch 1 | bpp_y_loss=0.51234 | bpp_z_loss=0.01558 | bpp_loss=0.52792 | mse_loss=0.00044 | loss=1.23759 | psnr_loss=34.32339
+[2024-01-18 02:37:15,820 | INFO | train_one_epoch] Learning rate: 1e-05
+[2024-01-18 02:37:21,642 | INFO | train_one_epoch] Train epoch 1: [0/100 (0.00%)] 	bpp_y_loss: 0.543040 |	bpp_z_loss: 0.012844 |	bpp_loss: 0.555885 |	mse_loss: 0.000345 |	loss: 1.116373 |	psnr_loss: 34.624542 |
+[2024-01-18 02:38:14,368 | INFO | train_one_epoch] Train epoch 1: [10/100 (10.00%)] 	bpp_y_loss: 0.514505 |	bpp_z_loss: 0.013366 |	bpp_loss: 0.527872 |	mse_loss: 0.000348 |	loss: 1.092967 |	psnr_loss: 34.736694 |
+[2024-01-18 02:39:06,522 | INFO | train_one_epoch] Train epoch 1: [20/100 (20.00%)] 	bpp_y_loss: 0.508598 |	bpp_z_loss: 0.013083 |	bpp_loss: 0.521681 |	mse_loss: 0.000335 |	loss: 1.066086 |	psnr_loss: 34.835659 |
+[2024-01-18 02:39:57,831 | INFO | train_one_epoch] Train epoch 1: [30/100 (30.00%)] 	bpp_y_loss: 0.509328 |	bpp_z_loss: 0.013199 |	bpp_loss: 0.522527 |	mse_loss: 0.000324 |	loss: 1.048596 |	psnr_loss: 34.956310 |
+[2024-01-18 02:40:50,106 | INFO | train_one_epoch] Train epoch 1: [40/100 (40.00%)] 	bpp_y_loss: 0.483377 |	bpp_z_loss: 0.012975 |	bpp_loss: 0.496352 |	mse_loss: 0.000319 |	loss: 1.015199 |	psnr_loss: 35.023582 |
+[2024-01-18 02:41:41,714 | INFO | train_one_epoch] Train epoch 1: [50/100 (50.00%)] 	bpp_y_loss: 0.534971 |	bpp_z_loss: 0.013336 |	bpp_loss: 0.548307 |	mse_loss: 0.000394 |	loss: 1.189142 |	psnr_loss: 34.275742 |
+[2024-01-18 02:42:33,487 | INFO | train_one_epoch] Train epoch 1: [60/100 (60.00%)] 	bpp_y_loss: 0.548988 |	bpp_z_loss: 0.013320 |	bpp_loss: 0.562309 |	mse_loss: 0.000374 |	loss: 1.170364 |	psnr_loss: 34.381130 |
+[2024-01-18 02:43:24,658 | INFO | train_one_epoch] Train epoch 1: [70/100 (70.00%)] 	bpp_y_loss: 0.534062 |	bpp_z_loss: 0.013333 |	bpp_loss: 0.547395 |	mse_loss: 0.000360 |	loss: 1.132674 |	psnr_loss: 34.519241 |
+[2024-01-18 02:44:16,728 | INFO | train_one_epoch] Train epoch 1: [80/100 (80.00%)] 	bpp_y_loss: 0.540883 |	bpp_z_loss: 0.013186 |	bpp_loss: 0.554069 |	mse_loss: 0.000376 |	loss: 1.165292 |	psnr_loss: 34.469757 |
+[2024-01-18 02:45:08,279 | INFO | train_one_epoch] Train epoch 1: [90/100 (90.00%)] 	bpp_y_loss: 0.545122 |	bpp_z_loss: 0.013165 |	bpp_loss: 0.558288 |	mse_loss: 0.000397 |	loss: 1.203766 |	psnr_loss: 34.265320 |
+[2024-01-18 02:45:59,891 | INFO | train_one_epoch] Train epoch 1: [100/100 (100.00%)] 	bpp_y_loss: 0.556905 |	bpp_z_loss: 0.013079 |	bpp_loss: 0.569984 |	mse_loss: 0.000401 |	loss: 1.222122 |	psnr_loss: 34.280743 |
+[2024-01-18 02:46:04,925 | INFO | test_one_epoch] Testing results for epoch 2 | bpp_y_loss=0.51240 | bpp_z_loss=0.01584 | bpp_loss=0.52824 | mse_loss=0.00044 | loss=1.23795 | psnr_loss=34.32380
+[2024-01-18 02:46:04,937 | INFO | train_one_epoch] Learning rate: 1e-05
+[2024-01-18 02:46:10,820 | INFO | train_one_epoch] Train epoch 2: [0/100 (0.00%)] 	bpp_y_loss: 0.551072 |	bpp_z_loss: 0.013118 |	bpp_loss: 0.564190 |	mse_loss: 0.000414 |	loss: 1.236900 |	psnr_loss: 33.831924 |
+[2024-01-18 02:47:01,928 | INFO | train_one_epoch] Train epoch 2: [10/100 (10.00%)] 	bpp_y_loss: 0.505410 |	bpp_z_loss: 0.012965 |	bpp_loss: 0.518375 |	mse_loss: 0.000348 |	loss: 1.084093 |	psnr_loss: 34.679760 |
+[2024-01-18 02:47:53,120 | INFO | train_one_epoch] Train epoch 2: [20/100 (20.00%)] 	bpp_y_loss: 0.501200 |	bpp_z_loss: 0.013094 |	bpp_loss: 0.514294 |	mse_loss: 0.000332 |	loss: 1.054141 |	psnr_loss: 34.908714 |
+[2024-01-18 02:48:45,526 | INFO | train_one_epoch] Train epoch 2: [30/100 (30.00%)] 	bpp_y_loss: 0.575869 |	bpp_z_loss: 0.013399 |	bpp_loss: 0.589268 |	mse_loss: 0.000391 |	loss: 1.225362 |	psnr_loss: 34.121552 |
+[2024-01-18 02:49:35,284 | INFO | train_one_epoch] Train epoch 2: [40/100 (40.00%)] 	bpp_y_loss: 0.573385 |	bpp_z_loss: 0.013236 |	bpp_loss: 0.586620 |	mse_loss: 0.000428 |	loss: 1.283036 |	psnr_loss: 33.779156 |
+[2024-01-18 02:50:25,586 | INFO | train_one_epoch] Train epoch 2: [50/100 (50.00%)] 	bpp_y_loss: 0.574260 |	bpp_z_loss: 0.013562 |	bpp_loss: 0.587822 |	mse_loss: 0.000411 |	loss: 1.256679 |	psnr_loss: 33.941067 |
+[2024-01-18 02:51:15,930 | INFO | train_one_epoch] Train epoch 2: [60/100 (60.00%)] 	bpp_y_loss: 0.512322 |	bpp_z_loss: 0.013192 |	bpp_loss: 0.525514 |	mse_loss: 0.000382 |	loss: 1.146798 |	psnr_loss: 34.289211 |
+[2024-01-18 02:52:07,598 | INFO | train_one_epoch] Train epoch 2: [70/100 (70.00%)] 	bpp_y_loss: 0.541126 |	bpp_z_loss: 0.013256 |	bpp_loss: 0.554382 |	mse_loss: 0.000348 |	loss: 1.119767 |	psnr_loss: 34.631138 |
+[2024-01-18 02:53:00,509 | INFO | train_one_epoch] Train epoch 2: [80/100 (80.00%)] 	bpp_y_loss: 0.536558 |	bpp_z_loss: 0.013156 |	bpp_loss: 0.549714 |	mse_loss: 0.000370 |	loss: 1.151749 |	psnr_loss: 34.497215 |
+[2024-01-18 02:53:53,229 | INFO | train_one_epoch] Train epoch 2: [90/100 (90.00%)] 	bpp_y_loss: 0.514762 |	bpp_z_loss: 0.013327 |	bpp_loss: 0.528088 |	mse_loss: 0.000359 |	loss: 1.111741 |	psnr_loss: 34.620037 |
+[2024-01-18 02:54:44,274 | INFO | train_one_epoch] Train epoch 2: [100/100 (100.00%)] 	bpp_y_loss: 0.522718 |	bpp_z_loss: 0.013425 |	bpp_loss: 0.536143 |	mse_loss: 0.000366 |	loss: 1.131125 |	psnr_loss: 34.518101 |
+[2024-01-18 02:54:49,376 | INFO | test_one_epoch] Testing results for epoch 3 | bpp_y_loss=0.51320 | bpp_z_loss=0.01615 | bpp_loss=0.52935 | mse_loss=0.00043 | loss=1.23619 | psnr_loss=34.34348
+[2024-01-18 02:54:49,387 | INFO | train_one_epoch] Learning rate: 1e-05
+[2024-01-18 02:54:55,385 | INFO | train_one_epoch] Train epoch 3: [0/100 (0.00%)] 	bpp_y_loss: 0.470348 |	bpp_z_loss: 0.013326 |	bpp_loss: 0.483674 |	mse_loss: 0.000459 |	loss: 1.230036 |	psnr_loss: 33.380711 |
+[2024-01-18 02:55:46,823 | INFO | train_one_epoch] Train epoch 3: [10/100 (10.00%)] 	bpp_y_loss: 0.530052 |	bpp_z_loss: 0.013076 |	bpp_loss: 0.543128 |	mse_loss: 0.000337 |	loss: 1.091205 |	psnr_loss: 34.767818 |
+[2024-01-18 02:56:38,298 | INFO | train_one_epoch] Train epoch 3: [20/100 (20.00%)] 	bpp_y_loss: 0.564671 |	bpp_z_loss: 0.013689 |	bpp_loss: 0.578360 |	mse_loss: 0.000374 |	loss: 1.187007 |	psnr_loss: 34.386211 |
+[2024-01-18 02:57:30,079 | INFO | train_one_epoch] Train epoch 3: [30/100 (30.00%)] 	bpp_y_loss: 0.567566 |	bpp_z_loss: 0.013392 |	bpp_loss: 0.580957 |	mse_loss: 0.000447 |	loss: 1.307668 |	psnr_loss: 33.838676 |
+[2024-01-18 02:58:21,317 | INFO | train_one_epoch] Train epoch 3: [40/100 (40.00%)] 	bpp_y_loss: 0.535082 |	bpp_z_loss: 0.013484 |	bpp_loss: 0.548566 |	mse_loss: 0.000357 |	loss: 1.128988 |	psnr_loss: 34.530937 |
+[2024-01-18 02:59:12,473 | INFO | train_one_epoch] Train epoch 3: [50/100 (50.00%)] 	bpp_y_loss: 0.522204 |	bpp_z_loss: 0.013214 |	bpp_loss: 0.535418 |	mse_loss: 0.000366 |	loss: 1.129837 |	psnr_loss: 34.457554 |
+[2024-01-18 03:00:03,789 | INFO | train_one_epoch] Train epoch 3: [60/100 (60.00%)] 	bpp_y_loss: 0.509088 |	bpp_z_loss: 0.013106 |	bpp_loss: 0.522194 |	mse_loss: 0.000348 |	loss: 1.087396 |	psnr_loss: 34.682098 |
+[2024-01-18 03:00:55,321 | INFO | train_one_epoch] Train epoch 3: [70/100 (70.00%)] 	bpp_y_loss: 0.556120 |	bpp_z_loss: 0.013471 |	bpp_loss: 0.569591 |	mse_loss: 0.000419 |	loss: 1.250570 |	psnr_loss: 33.930401 |
+[2024-01-18 03:01:46,343 | INFO | train_one_epoch] Train epoch 3: [80/100 (80.00%)] 	bpp_y_loss: 0.511883 |	bpp_z_loss: 0.013211 |	bpp_loss: 0.525094 |	mse_loss: 0.000347 |	loss: 1.089677 |	psnr_loss: 34.669239 |
+[2024-01-18 03:02:38,152 | INFO | train_one_epoch] Train epoch 3: [90/100 (90.00%)] 	bpp_y_loss: 0.543383 |	bpp_z_loss: 0.013293 |	bpp_loss: 0.556676 |	mse_loss: 0.000365 |	loss: 1.150640 |	psnr_loss: 34.430454 |
+[2024-01-18 03:03:28,710 | INFO | train_one_epoch] Train epoch 3: [100/100 (100.00%)] 	bpp_y_loss: 0.518739 |	bpp_z_loss: 0.013266 |	bpp_loss: 0.532005 |	mse_loss: 0.000363 |	loss: 1.121846 |	psnr_loss: 34.515900 |
+[2024-01-18 03:03:33,808 | INFO | test_one_epoch] Testing results for epoch 4 | bpp_y_loss=0.50939 | bpp_z_loss=0.01623 | bpp_loss=0.52562 | mse_loss=0.00044 | loss=1.23612 | psnr_loss=34.31603
+[2024-01-18 03:03:33,827 | INFO | train_one_epoch] Learning rate: 1e-05
+[2024-01-18 03:03:39,580 | INFO | train_one_epoch] Train epoch 4: [0/100 (0.00%)] 	bpp_y_loss: 0.598171 |	bpp_z_loss: 0.014017 |	bpp_loss: 0.612187 |	mse_loss: 0.000404 |	loss: 1.269233 |	psnr_loss: 33.934250 |
+[2024-01-18 03:04:31,462 | INFO | train_one_epoch] Train epoch 4: [10/100 (10.00%)] 	bpp_y_loss: 0.518998 |	bpp_z_loss: 0.013281 |	bpp_loss: 0.532279 |	mse_loss: 0.000356 |	loss: 1.110427 |	psnr_loss: 34.550484 |
+[2024-01-18 03:05:22,979 | INFO | train_one_epoch] Train epoch 4: [20/100 (20.00%)] 	bpp_y_loss: 0.478807 |	bpp_z_loss: 0.013200 |	bpp_loss: 0.492008 |	mse_loss: 0.000323 |	loss: 1.016694 |	psnr_loss: 34.937916 |
+[2024-01-18 03:06:14,243 | INFO | train_one_epoch] Train epoch 4: [30/100 (30.00%)] 	bpp_y_loss: 0.574716 |	bpp_z_loss: 0.013465 |	bpp_loss: 0.588181 |	mse_loss: 0.000417 |	loss: 1.266776 |	psnr_loss: 33.969921 |
+[2024-01-18 03:07:06,484 | INFO | train_one_epoch] Train epoch 4: [40/100 (40.00%)] 	bpp_y_loss: 0.565336 |	bpp_z_loss: 0.013119 |	bpp_loss: 0.578455 |	mse_loss: 0.000419 |	loss: 1.258930 |	psnr_loss: 34.040573 |
+[2024-01-18 03:07:57,198 | INFO | train_one_epoch] Train epoch 4: [50/100 (50.00%)] 	bpp_y_loss: 0.583762 |	bpp_z_loss: 0.013567 |	bpp_loss: 0.597329 |	mse_loss: 0.000408 |	loss: 1.260670 |	psnr_loss: 33.969646 |
+[2024-01-18 03:08:47,150 | INFO | train_one_epoch] Train epoch 4: [60/100 (60.00%)] 	bpp_y_loss: 0.562423 |	bpp_z_loss: 0.013049 |	bpp_loss: 0.575472 |	mse_loss: 0.000385 |	loss: 1.202085 |	psnr_loss: 34.276348 |
+[2024-01-18 03:09:36,965 | INFO | train_one_epoch] Train epoch 4: [70/100 (70.00%)] 	bpp_y_loss: 0.590789 |	bpp_z_loss: 0.013380 |	bpp_loss: 0.604170 |	mse_loss: 0.000464 |	loss: 1.358993 |	psnr_loss: 33.648335 |
+[2024-01-18 03:10:27,724 | INFO | train_one_epoch] Train epoch 4: [80/100 (80.00%)] 	bpp_y_loss: 0.586966 |	bpp_z_loss: 0.013454 |	bpp_loss: 0.600420 |	mse_loss: 0.000437 |	loss: 1.310465 |	psnr_loss: 33.751247 |
+[2024-01-18 03:11:18,823 | INFO | train_one_epoch] Train epoch 4: [90/100 (90.00%)] 	bpp_y_loss: 0.551733 |	bpp_z_loss: 0.013346 |	bpp_loss: 0.565079 |	mse_loss: 0.000414 |	loss: 1.237919 |	psnr_loss: 33.960823 |
+[2024-01-18 03:12:10,126 | INFO | train_one_epoch] Train epoch 4: [100/100 (100.00%)] 	bpp_y_loss: 0.520475 |	bpp_z_loss: 0.013307 |	bpp_loss: 0.533782 |	mse_loss: 0.000358 |	loss: 1.115172 |	psnr_loss: 34.610897 |
+[2024-01-18 03:12:14,963 | INFO | test_one_epoch] Testing results for epoch 5 | bpp_y_loss=0.50834 | bpp_z_loss=0.01621 | bpp_loss=0.52455 | mse_loss=0.00044 | loss=1.23532 | psnr_loss=34.31115
+[2024-01-18 03:12:14,985 | INFO | train_one_epoch] Learning rate: 1e-05
+[2024-01-18 03:12:20,702 | INFO | train_one_epoch] Train epoch 5: [0/100 (0.00%)] 	bpp_y_loss: 0.514792 |	bpp_z_loss: 0.014409 |	bpp_loss: 0.529201 |	mse_loss: 0.000364 |	loss: 1.120548 |	psnr_loss: 34.391773 |
+[2024-01-18 03:13:09,891 | INFO | train_one_epoch] Train epoch 5: [10/100 (10.00%)] 	bpp_y_loss: 0.510047 |	bpp_z_loss: 0.013277 |	bpp_loss: 0.523324 |	mse_loss: 0.000354 |	loss: 1.098094 |	psnr_loss: 34.582699 |
+[2024-01-18 03:14:00,701 | INFO | train_one_epoch] Train epoch 5: [20/100 (20.00%)] 	bpp_y_loss: 0.544839 |	bpp_z_loss: 0.013339 |	bpp_loss: 0.558178 |	mse_loss: 0.000366 |	loss: 1.153502 |	psnr_loss: 34.512569 |
+[2024-01-18 03:14:51,444 | INFO | train_one_epoch] Train epoch 5: [30/100 (30.00%)] 	bpp_y_loss: 0.509620 |	bpp_z_loss: 0.013212 |	bpp_loss: 0.522832 |	mse_loss: 0.000338 |	loss: 1.072050 |	psnr_loss: 34.801235 |
+[2024-01-18 03:15:41,684 | INFO | train_one_epoch] Train epoch 5: [40/100 (40.00%)] 	bpp_y_loss: 0.579802 |	bpp_z_loss: 0.013503 |	bpp_loss: 0.593305 |	mse_loss: 0.000399 |	loss: 1.241954 |	psnr_loss: 34.169117 |
+[2024-01-18 03:16:30,790 | INFO | train_one_epoch] Train epoch 5: [50/100 (50.00%)] 	bpp_y_loss: 0.535937 |	bpp_z_loss: 0.013086 |	bpp_loss: 0.549024 |	mse_loss: 0.000377 |	loss: 1.162649 |	psnr_loss: 34.360424 |
+[2024-01-18 03:17:21,701 | INFO | train_one_epoch] Train epoch 5: [60/100 (60.00%)] 	bpp_y_loss: 0.534790 |	bpp_z_loss: 0.013222 |	bpp_loss: 0.548011 |	mse_loss: 0.000388 |	loss: 1.178341 |	psnr_loss: 34.389904 |
+[2024-01-18 03:18:11,647 | INFO | train_one_epoch] Train epoch 5: [70/100 (70.00%)] 	bpp_y_loss: 0.524659 |	bpp_z_loss: 0.013169 |	bpp_loss: 0.537828 |	mse_loss: 0.000351 |	loss: 1.107669 |	psnr_loss: 34.676434 |
+[2024-01-18 03:19:02,732 | INFO | train_one_epoch] Train epoch 5: [80/100 (80.00%)] 	bpp_y_loss: 0.512314 |	bpp_z_loss: 0.013217 |	bpp_loss: 0.525531 |	mse_loss: 0.000324 |	loss: 1.052553 |	psnr_loss: 34.914307 |
+[2024-01-18 03:19:52,574 | INFO | train_one_epoch] Train epoch 5: [90/100 (90.00%)] 	bpp_y_loss: 0.544022 |	bpp_z_loss: 0.013350 |	bpp_loss: 0.557372 |	mse_loss: 0.000377 |	loss: 1.171013 |	psnr_loss: 34.286770 |
+[2024-01-18 03:20:43,578 | INFO | train_one_epoch] Train epoch 5: [100/100 (100.00%)] 	bpp_y_loss: 0.516581 |	bpp_z_loss: 0.013092 |	bpp_loss: 0.529673 |	mse_loss: 0.000346 |	loss: 1.092372 |	psnr_loss: 34.678722 |
+[2024-01-18 03:20:48,574 | INFO | test_one_epoch] Testing results for epoch 6 | bpp_y_loss=0.51040 | bpp_z_loss=0.01592 | bpp_loss=0.52632 | mse_loss=0.00044 | loss=1.23979 | psnr_loss=34.29594
+[2024-01-18 03:20:48,588 | INFO | train_one_epoch] Learning rate: 1e-05
+[2024-01-18 03:20:54,648 | INFO | train_one_epoch] Train epoch 6: [0/100 (0.00%)] 	bpp_y_loss: 0.629579 |	bpp_z_loss: 0.013170 |	bpp_loss: 0.642749 |	mse_loss: 0.000648 |	loss: 1.695431 |	psnr_loss: 31.887236 |
+[2024-01-18 03:21:45,638 | INFO | train_one_epoch] Train epoch 6: [10/100 (10.00%)] 	bpp_y_loss: 0.515441 |	bpp_z_loss: 0.013252 |	bpp_loss: 0.528694 |	mse_loss: 0.000366 |	loss: 1.123431 |	psnr_loss: 34.668446 |
+[2024-01-18 03:22:36,404 | INFO | train_one_epoch] Train epoch 6: [20/100 (20.00%)] 	bpp_y_loss: 0.521857 |	bpp_z_loss: 0.013378 |	bpp_loss: 0.535235 |	mse_loss: 0.000351 |	loss: 1.106217 |	psnr_loss: 34.631786 |
+[2024-01-18 03:23:26,662 | INFO | train_one_epoch] Train epoch 6: [30/100 (30.00%)] 	bpp_y_loss: 0.519981 |	bpp_z_loss: 0.013076 |	bpp_loss: 0.533057 |	mse_loss: 0.000330 |	loss: 1.069785 |	psnr_loss: 34.876396 |
+[2024-01-18 03:24:18,366 | INFO | train_one_epoch] Train epoch 6: [40/100 (40.00%)] 	bpp_y_loss: 0.552767 |	bpp_z_loss: 0.013185 |	bpp_loss: 0.565952 |	mse_loss: 0.000397 |	loss: 1.211822 |	psnr_loss: 34.184860 |
+[2024-01-18 03:25:08,886 | INFO | train_one_epoch] Train epoch 6: [50/100 (50.00%)] 	bpp_y_loss: 0.547661 |	bpp_z_loss: 0.013423 |	bpp_loss: 0.561084 |	mse_loss: 0.000381 |	loss: 1.180387 |	psnr_loss: 34.244003 |
+[2024-01-18 03:25:59,136 | INFO | train_one_epoch] Train epoch 6: [60/100 (60.00%)] 	bpp_y_loss: 0.578808 |	bpp_z_loss: 0.013489 |	bpp_loss: 0.592297 |	mse_loss: 0.000393 |	loss: 1.231188 |	psnr_loss: 34.199253 |
+[2024-01-18 03:26:49,620 | INFO | train_one_epoch] Train epoch 6: [70/100 (70.00%)] 	bpp_y_loss: 0.512349 |	bpp_z_loss: 0.013073 |	bpp_loss: 0.525423 |	mse_loss: 0.000356 |	loss: 1.103657 |	psnr_loss: 34.595501 |
+[2024-01-18 03:27:42,483 | INFO | train_one_epoch] Train epoch 6: [80/100 (80.00%)] 	bpp_y_loss: 0.535724 |	bpp_z_loss: 0.013206 |	bpp_loss: 0.548930 |	mse_loss: 0.000333 |	loss: 1.090747 |	psnr_loss: 34.880299 |
+[2024-01-18 03:28:33,353 | INFO | train_one_epoch] Train epoch 6: [90/100 (90.00%)] 	bpp_y_loss: 0.520896 |	bpp_z_loss: 0.013639 |	bpp_loss: 0.534535 |	mse_loss: 0.000348 |	loss: 1.100435 |	psnr_loss: 34.706345 |
+[2024-01-18 03:29:24,324 | INFO | train_one_epoch] Train epoch 6: [100/100 (100.00%)] 	bpp_y_loss: 0.540361 |	bpp_z_loss: 0.013829 |	bpp_loss: 0.554190 |	mse_loss: 0.000351 |	loss: 1.125312 |	psnr_loss: 34.654984 |
+[2024-01-18 03:29:29,212 | INFO | test_one_epoch] Testing results for epoch 7 | bpp_y_loss=0.50806 | bpp_z_loss=0.01573 | bpp_loss=0.52379 | mse_loss=0.00044 | loss=1.24510 | psnr_loss=34.24035
+[2024-01-18 03:29:29,230 | INFO | train_one_epoch] Learning rate: 1e-05
+[2024-01-18 03:29:34,844 | INFO | train_one_epoch] Train epoch 7: [0/100 (0.00%)] 	bpp_y_loss: 0.518364 |	bpp_z_loss: 0.012871 |	bpp_loss: 0.531234 |	mse_loss: 0.000388 |	loss: 1.162713 |	psnr_loss: 34.106621 |
+[2024-01-18 03:30:25,273 | INFO | train_one_epoch] Train epoch 7: [10/100 (10.00%)] 	bpp_y_loss: 0.539324 |	bpp_z_loss: 0.013924 |	bpp_loss: 0.553248 |	mse_loss: 0.000364 |	loss: 1.145720 |	psnr_loss: 34.501453 |
+[2024-01-18 03:31:16,050 | INFO | train_one_epoch] Train epoch 7: [20/100 (20.00%)] 	bpp_y_loss: 0.549109 |	bpp_z_loss: 0.013993 |	bpp_loss: 0.563102 |	mse_loss: 0.000365 |	loss: 1.157203 |	psnr_loss: 34.421993 |
+[2024-01-18 03:32:07,102 | INFO | train_one_epoch] Train epoch 7: [30/100 (30.00%)] 	bpp_y_loss: 0.549563 |	bpp_z_loss: 0.014280 |	bpp_loss: 0.563843 |	mse_loss: 0.000347 |	loss: 1.128669 |	psnr_loss: 34.616634 |
+[2024-01-18 03:32:56,915 | INFO | train_one_epoch] Train epoch 7: [40/100 (40.00%)] 	bpp_y_loss: 0.520783 |	bpp_z_loss: 0.013503 |	bpp_loss: 0.534286 |	mse_loss: 0.000316 |	loss: 1.047234 |	psnr_loss: 35.074169 |
+[2024-01-18 03:33:47,239 | INFO | train_one_epoch] Train epoch 7: [50/100 (50.00%)] 	bpp_y_loss: 0.548832 |	bpp_z_loss: 0.013498 |	bpp_loss: 0.562330 |	mse_loss: 0.000346 |	loss: 1.124315 |	psnr_loss: 34.737087 |
+[2024-01-18 03:34:40,568 | INFO | train_one_epoch] Train epoch 7: [60/100 (60.00%)] 	bpp_y_loss: 0.544041 |	bpp_z_loss: 0.013608 |	bpp_loss: 0.557649 |	mse_loss: 0.000374 |	loss: 1.166016 |	psnr_loss: 34.343536 |
+[2024-01-18 03:35:36,052 | INFO | train_one_epoch] Train epoch 7: [70/100 (70.00%)] 	bpp_y_loss: 0.535093 |	bpp_z_loss: 0.013487 |	bpp_loss: 0.548580 |	mse_loss: 0.000357 |	loss: 1.128435 |	psnr_loss: 34.664577 |
+[2024-01-18 03:36:27,356 | INFO | train_one_epoch] Train epoch 7: [80/100 (80.00%)] 	bpp_y_loss: 0.533069 |	bpp_z_loss: 0.013177 |	bpp_loss: 0.546246 |	mse_loss: 0.000346 |	loss: 1.108199 |	psnr_loss: 34.757912 |
+[2024-01-18 03:37:19,600 | INFO | train_one_epoch] Train epoch 7: [90/100 (90.00%)] 	bpp_y_loss: 0.519759 |	bpp_z_loss: 0.013216 |	bpp_loss: 0.532976 |	mse_loss: 0.000379 |	loss: 1.148276 |	psnr_loss: 34.411247 |
+[2024-01-18 03:38:11,397 | INFO | train_one_epoch] Train epoch 7: [100/100 (100.00%)] 	bpp_y_loss: 0.594181 |	bpp_z_loss: 0.013417 |	bpp_loss: 0.607599 |	mse_loss: 0.000419 |	loss: 1.289325 |	psnr_loss: 33.921669 |
+[2024-01-18 03:38:16,476 | INFO | test_one_epoch] Testing results for epoch 8 | bpp_y_loss=0.50988 | bpp_z_loss=0.01579 | bpp_loss=0.52568 | mse_loss=0.00045 | loss=1.24987 | psnr_loss=34.21295
+[2024-01-18 03:38:16,490 | INFO | train_one_epoch] Learning rate: 1e-05
+[2024-01-18 03:38:22,509 | INFO | train_one_epoch] Train epoch 8: [0/100 (0.00%)] 	bpp_y_loss: 0.478520 |	bpp_z_loss: 0.013119 |	bpp_loss: 0.491639 |	mse_loss: 0.000316 |	loss: 1.005565 |	psnr_loss: 35.001198 |
+[2024-01-18 03:39:13,784 | INFO | train_one_epoch] Train epoch 8: [10/100 (10.00%)] 	bpp_y_loss: 0.532889 |	bpp_z_loss: 0.013412 |	bpp_loss: 0.546300 |	mse_loss: 0.000348 |	loss: 1.112492 |	psnr_loss: 34.683453 |
+[2024-01-18 03:40:03,854 | INFO | train_one_epoch] Train epoch 8: [20/100 (20.00%)] 	bpp_y_loss: 0.538082 |	bpp_z_loss: 0.013088 |	bpp_loss: 0.551170 |	mse_loss: 0.000383 |	loss: 1.173646 |	psnr_loss: 34.330486 |
+[2024-01-18 03:40:55,980 | INFO | train_one_epoch] Train epoch 8: [30/100 (30.00%)] 	bpp_y_loss: 0.543057 |	bpp_z_loss: 0.013133 |	bpp_loss: 0.556190 |	mse_loss: 0.000366 |	loss: 1.151008 |	psnr_loss: 34.429501 |
+[2024-01-18 03:41:50,078 | INFO | train_one_epoch] Train epoch 8: [40/100 (40.00%)] 	bpp_y_loss: 0.513378 |	bpp_z_loss: 0.012929 |	bpp_loss: 0.526307 |	mse_loss: 0.000361 |	loss: 1.112851 |	psnr_loss: 34.599072 |
+[2024-01-18 03:42:44,290 | INFO | train_one_epoch] Train epoch 8: [50/100 (50.00%)] 	bpp_y_loss: 0.563739 |	bpp_z_loss: 0.013531 |	bpp_loss: 0.577270 |	mse_loss: 0.000395 |	loss: 1.219586 |	psnr_loss: 34.174129 |
+[2024-01-18 03:43:34,849 | INFO | train_one_epoch] Train epoch 8: [60/100 (60.00%)] 	bpp_y_loss: 0.510257 |	bpp_z_loss: 0.013574 |	bpp_loss: 0.523831 |	mse_loss: 0.000327 |	loss: 1.054791 |	psnr_loss: 34.919220 |
+[2024-01-18 03:44:26,783 | INFO | train_one_epoch] Train epoch 8: [70/100 (70.00%)] 	bpp_y_loss: 0.493884 |	bpp_z_loss: 0.013264 |	bpp_loss: 0.507148 |	mse_loss: 0.000321 |	loss: 1.029203 |	psnr_loss: 35.078293 |
+[2024-01-18 03:45:17,976 | INFO | train_one_epoch] Train epoch 8: [80/100 (80.00%)] 	bpp_y_loss: 0.591484 |	bpp_z_loss: 0.013332 |	bpp_loss: 0.604815 |	mse_loss: 0.000447 |	loss: 1.331926 |	psnr_loss: 33.801800 |
+[2024-01-18 03:46:09,124 | INFO | train_one_epoch] Train epoch 8: [90/100 (90.00%)] 	bpp_y_loss: 0.522218 |	bpp_z_loss: 0.013054 |	bpp_loss: 0.535271 |	mse_loss: 0.000350 |	loss: 1.104074 |	psnr_loss: 34.652187 |
+[2024-01-18 03:47:00,190 | INFO | train_one_epoch] Train epoch 8: [100/100 (100.00%)] 	bpp_y_loss: 0.531009 |	bpp_z_loss: 0.013472 |	bpp_loss: 0.544481 |	mse_loss: 0.000356 |	loss: 1.124002 |	psnr_loss: 34.564388 |
+[2024-01-18 03:47:05,194 | INFO | test_one_epoch] Testing results for epoch 9 | bpp_y_loss=0.51239 | bpp_z_loss=0.01590 | bpp_loss=0.52828 | mse_loss=0.00044 | loss=1.24120 | psnr_loss=34.30022
+[2024-01-18 03:47:05,208 | INFO | train_one_epoch] Learning rate: 1e-05
+[2024-01-18 03:47:10,889 | INFO | train_one_epoch] Train epoch 9: [0/100 (0.00%)] 	bpp_y_loss: 0.495662 |	bpp_z_loss: 0.013080 |	bpp_loss: 0.508742 |	mse_loss: 0.000268 |	loss: 0.944093 |	psnr_loss: 35.721809 |
+[2024-01-18 03:48:01,657 | INFO | train_one_epoch] Train epoch 9: [10/100 (10.00%)] 	bpp_y_loss: 0.497508 |	bpp_z_loss: 0.012986 |	bpp_loss: 0.510494 |	mse_loss: 0.000329 |	loss: 1.046028 |	psnr_loss: 34.938400 |
+[2024-01-18 03:48:52,331 | INFO | train_one_epoch] Train epoch 9: [20/100 (20.00%)] 	bpp_y_loss: 0.561007 |	bpp_z_loss: 0.013416 |	bpp_loss: 0.574424 |	mse_loss: 0.000354 |	loss: 1.149738 |	psnr_loss: 34.765457 |
+[2024-01-18 03:49:43,553 | INFO | train_one_epoch] Train epoch 9: [30/100 (30.00%)] 	bpp_y_loss: 0.525219 |	bpp_z_loss: 0.013267 |	bpp_loss: 0.538486 |	mse_loss: 0.000347 |	loss: 1.103198 |	psnr_loss: 34.703426 |
+[2024-01-18 03:50:35,646 | INFO | train_one_epoch] Train epoch 9: [40/100 (40.00%)] 	bpp_y_loss: 0.523354 |	bpp_z_loss: 0.013233 |	bpp_loss: 0.536587 |	mse_loss: 0.000372 |	loss: 1.141457 |	psnr_loss: 34.408127 |
+[2024-01-18 03:51:27,124 | INFO | train_one_epoch] Train epoch 9: [50/100 (50.00%)] 	bpp_y_loss: 0.581712 |	bpp_z_loss: 0.013675 |	bpp_loss: 0.595386 |	mse_loss: 0.000414 |	loss: 1.268374 |	psnr_loss: 33.953773 |
+[2024-01-18 03:52:18,019 | INFO | train_one_epoch] Train epoch 9: [60/100 (60.00%)] 	bpp_y_loss: 0.534971 |	bpp_z_loss: 0.013398 |	bpp_loss: 0.548369 |	mse_loss: 0.000391 |	loss: 1.183532 |	psnr_loss: 34.124508 |
+[2024-01-18 03:53:08,564 | INFO | train_one_epoch] Train epoch 9: [70/100 (70.00%)] 	bpp_y_loss: 0.562889 |	bpp_z_loss: 0.013462 |	bpp_loss: 0.576351 |	mse_loss: 0.000394 |	loss: 1.217010 |	psnr_loss: 34.143169 |
+[2024-01-18 03:53:59,708 | INFO | train_one_epoch] Train epoch 9: [80/100 (80.00%)] 	bpp_y_loss: 0.515911 |	bpp_z_loss: 0.013022 |	bpp_loss: 0.528933 |	mse_loss: 0.000359 |	loss: 1.112712 |	psnr_loss: 34.590412 |
+[2024-01-18 03:54:52,838 | INFO | train_one_epoch] Train epoch 9: [90/100 (90.00%)] 	bpp_y_loss: 0.577944 |	bpp_z_loss: 0.013255 |	bpp_loss: 0.591199 |	mse_loss: 0.000379 |	loss: 1.206544 |	psnr_loss: 34.299450 |
+[2024-01-18 03:55:43,554 | INFO | train_one_epoch] Train epoch 9: [100/100 (100.00%)] 	bpp_y_loss: 0.534563 |	bpp_z_loss: 0.013388 |	bpp_loss: 0.547950 |	mse_loss: 0.000360 |	loss: 1.133873 |	psnr_loss: 34.522038 |
+[2024-01-18 03:55:48,411 | INFO | test_one_epoch] Testing results for epoch 10 | bpp_y_loss=0.51271 | bpp_z_loss=0.01594 | bpp_loss=0.52865 | mse_loss=0.00044 | loss=1.23973 | psnr_loss=34.31831
